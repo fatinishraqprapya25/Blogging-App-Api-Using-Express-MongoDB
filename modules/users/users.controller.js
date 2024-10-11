@@ -3,6 +3,7 @@ const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
+const sendResponse = require("../../utils/sendResponse");
 
 const createUser = async (req, res) => {
     try {
@@ -42,26 +43,25 @@ const loginUser = async (req, res) => {
     try {
         const result = await userServices.loginUser(userData);
         if (!result) {
-            res.status(403).json({
-                sucess: false,
-                message: "incorrect password"
+            sendResponse(res, 403, {
+                success: false,
+                message: "incorrect password",
             });
         } else {
-            console.log(result);
-            const token = generateToken(result);
 
-            res.status(200).json({
-                sucess: true,
-                message: "logged in successfully",
+            const token = generateToken(result);
+            sendResponse(res, 200, {
+                success: true,
+                message: "user logged in successfully!",
                 token
             });
         }
 
     } catch (err) {
-        res.status(403).json({
-            sucess: false,
-            message: "server error occured during login"
-        });
+        sendResponse(res, 500, {
+            success: false,
+            message: "server error occured during login",
+        })
     }
 
 }
@@ -69,16 +69,16 @@ const loginUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
         const result = await userServices.getAllUsers();
-        res.status(200).json({
+        sendResponse(res, 200, {
+            success: true,
             message: "Users retrieved successfully!",
             data: result
         });
     } catch (err) {
-        res.status(500).json({
-            status: 500,
+        sendResponse(res, 500, {
+            success: false,
             message: "Failed in retrieving users",
-            error: err.message
-        });
+        })
     }
 };
 
@@ -86,15 +86,15 @@ const getSingleUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const result = await userServices.getSingleUser(userId);
-        res.status(2000).json({
+        sendResponse(res, 200, {
+            success: true,
             message: "User retrieved successfully!",
             data: result
         });
     } catch (err) {
-        res.status(500).json({
-            status: 500,
+        sendResponse(res, 500, {
+            success: true,
             message: "Failed in retrieving user",
-            error: err.message
         });
     }
 };
@@ -105,16 +105,15 @@ const updateUser = async (req, res) => {
         const userData = req.body;
         if (userData.password) userData.password = await bcrypt.hash(userData.password, Number(config.bcryptCircleCount) || 10);
         const result = await userServices.updateUser(userId, userData);
-        res.json({
-            status: 200,
+        sendResponse(res, 200, {
+            success: true,
             message: "User updated successfully!",
             data: result
         });
     } catch (err) {
-        res.status(500).json({
-            status: 500,
+        sendResponse(res, 500, {
+            success: false,
             message: "Failed in updating user",
-            error: err.message
         });
     }
 };
