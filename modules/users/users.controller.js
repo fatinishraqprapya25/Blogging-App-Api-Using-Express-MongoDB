@@ -123,5 +123,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, deleteUser, updateUser, loginUser };
+const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser };
 module.exports = userControllers;

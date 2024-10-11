@@ -32,5 +32,5 @@ const updateUser = async (userId, updateData) => {
     return result;
 };
 
-const userServices = { createUserIntoDb, getSingleUser, getAllUsers, deleteUser, updateUser, loginUser };
+const userServices = { createUserIntoDb, getSingleUser, getAllUsers, updateUser, loginUser };
 module.exports = userServices;
