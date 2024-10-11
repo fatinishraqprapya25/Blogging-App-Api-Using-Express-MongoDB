@@ -35,6 +35,35 @@ const createUser = async (req, res) => {
     }
 };
 
+const loginUser = async (req, res) => {
+    const userData = req.body;
+
+    try {
+        const result = await userServices.loginUser(userData);
+        if (!result) {
+            res.json({
+                sucess: false,
+                status: 403,
+                message: "incorrect password"
+            });
+        } else {
+            res.json({
+                sucess: true,
+                status: 200,
+                message: "logged in successfully"
+            });
+        }
+
+    } catch (err) {
+        res.json({
+            sucess: false,
+            status: 403,
+            message: "server error occured during login"
+        });
+    }
+
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const result = await userServices.getAllUsers();
@@ -107,5 +136,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, deleteUser, updateUser };
+const userControllers = { createUser, getAllUsers, getSingleUser, deleteUser, updateUser, loginUser };
 module.exports = userControllers;

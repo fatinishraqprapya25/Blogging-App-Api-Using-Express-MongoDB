@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
     firstName: String,
@@ -15,7 +16,7 @@ userSchema.statics.isEmailTaken = async function (email) {
 };
 
 // method to compare password during login
-userSchema.statics.comparePassword = function (password) {
+userSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password);
 }
 

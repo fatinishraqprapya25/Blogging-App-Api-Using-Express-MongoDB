@@ -1,8 +1,16 @@
-const User = require("./users.schema")
+const User = require("./users.schema");
 
 const createUserIntoDb = async (userData) => {
     const result = await User.create(userData);
     return result;
+}
+
+const loginUser = async ({ email, password }) => {
+    const user = await User.findOne({ email });
+    if (!user) return null;
+    const checkPass = await user.comparePassword(password);
+    if (checkPass) return true;
+    return null;
 }
 
 const getSingleUser = async (userId) => {
@@ -29,5 +37,5 @@ const updateUser = async (userId, updateData) => {
     return result;
 };
 
-const userServices = { createUserIntoDb, getSingleUser, getAllUsers, deleteUser, updateUser };
+const userServices = { createUserIntoDb, getSingleUser, getAllUsers, deleteUser, updateUser, loginUser };
 module.exports = userServices;
