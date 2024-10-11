@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
-const { generateToken } = require("../../utils/jwt");
+const generateToken = require("../../utils/jwt");
 
 const createUser = async (req, res) => {
     try {
@@ -106,8 +106,9 @@ const getSingleUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const userId = req.user.id;
         const userData = req.body;
+        if (userData.password) userData.password = await bcrypt.hash(userData.password, Number(config.bcryptCircleCount) || 10);
         const result = await userServices.updateUser(userId, userData);
         res.json({
             status: 200,
