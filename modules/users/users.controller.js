@@ -104,24 +104,6 @@ const getSingleUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
-    try {
-        const userId = req.params.id;
-        const result = await userServices.deleteUser(userId);
-        res.json({
-            status: 200,
-            message: "User deleted successfully!",
-            data: result
-        });
-    } catch (err) {
-        res.status(500).json({
-            status: 500,
-            message: "Failed in deleting user",
-            error: err.message
-        });
-    }
-};
-
 const updateUser = async (req, res) => {
     try {
         const userId = req.params.id;

@@ -23,11 +23,6 @@ const getAllUsers = async () => {
     return result;
 }
 
-const deleteUser = async (id) => {
-    const result = await User.findByIdAndDelete(id);
-    return result;
-}
-
 const updateUser = async (userId, updateData) => {
     const result = await User.findByIdAndUpdate(
         userId,
