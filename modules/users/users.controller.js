@@ -42,27 +42,24 @@ const loginUser = async (req, res) => {
     try {
         const result = await userServices.loginUser(userData);
         if (!result) {
-            res.json({
+            res.status(403).json({
                 sucess: false,
-                status: 403,
                 message: "incorrect password"
             });
         } else {
             console.log(result);
             const token = generateToken(result);
 
-            res.json({
+            res.status(200).json({
                 sucess: true,
-                status: 200,
                 message: "logged in successfully",
                 token
             });
         }
 
     } catch (err) {
-        res.json({
+        res.status(403).json({
             sucess: false,
-            status: 403,
             message: "server error occured during login"
         });
     }
@@ -72,8 +69,7 @@ const loginUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
     try {
         const result = await userServices.getAllUsers();
-        res.json({
-            status: 200,
+        res.status(200).json({
             message: "Users retrieved successfully!",
             data: result
         });
@@ -90,8 +86,7 @@ const getSingleUser = async (req, res) => {
     try {
         const userId = req.params.id;
         const result = await userServices.getSingleUser(userId);
-        res.json({
-            status: 200,
+        res.status(2000).json({
             message: "User retrieved successfully!",
             data: result
         });
