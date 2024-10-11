@@ -8,10 +8,12 @@ const userSchema = new mongoose.Schema({
     phone: String
 });
 
+// Checking email to handle duplicate emails
 userSchema.statics.isEmailTaken = async function (email) {
     const user = await this.findOne({ email });
     return !!user;
 };
+
 
 const User = mongoose.model("User", userSchema);
 

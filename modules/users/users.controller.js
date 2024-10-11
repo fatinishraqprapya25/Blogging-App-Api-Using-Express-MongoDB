@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
 
@@ -13,12 +15,17 @@ const createUser = async (req, res) => {
             });
         }
 
+        const hashedPassword = await bcrypt.hash(userData.password, Number(config.bcryptCircleCount) || 10);
+
+        userData.password = hashedPassword;
+
         const result = await userServices.createUserIntoDb(userData);
         res.json({
             status: 200,
-            message: "User is created successfully!",
+            message: "User is Registered successfully!",
             data: result
         });
+
     } catch (err) {
         res.status(500).json({
             status: 500,
