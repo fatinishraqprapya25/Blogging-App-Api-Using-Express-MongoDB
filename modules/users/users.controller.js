@@ -4,6 +4,7 @@ const User = require("./users.schema");
 const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
 const sendResponse = require("../../utils/sendResponse");
+const hashPassword = require("../../utils/hashPassword");
 
 const createUser = async (req, res) => {
     try {
@@ -17,9 +18,7 @@ const createUser = async (req, res) => {
             });
         }
 
-        const hashedPassword = await bcrypt.hash(userData.password, Number(config.bcryptCircleCount) || 10);
-
-        userData.password = hashedPassword;
+        userData.password = await hashPassword(userData.password, Number(config.bcryptCircleCount));
 
         const result = await userServices.createUserIntoDb(userData);
         res.json({
@@ -103,7 +102,9 @@ const updateUser = async (req, res) => {
     try {
         const userId = req.user.id;
         const userData = req.body;
-        if (userData.password) userData.password = await bcrypt.hash(userData.password, Number(config.bcryptCircleCount) || 10);
+        if (userData.password) {
+            userData.password = await hashPassword(userData.password, Number(config.bcryptCircleCount));
+        }
         const result = await userServices.updateUser(userId, userData);
         sendResponse(res, 200, {
             success: true,
