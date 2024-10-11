@@ -14,6 +14,10 @@ userSchema.statics.isEmailTaken = async function (email) {
     return !!user;
 };
 
+// method to compare password during login
+userSchema.statics.comparePassword = function (password) {
+    return bcrypt.compare(password, this.password);
+}
 
 const User = mongoose.model("User", userSchema);
 
