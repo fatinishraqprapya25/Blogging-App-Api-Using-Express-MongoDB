@@ -1,4 +1,3 @@
-const bcrypt = require("bcrypt");
 const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
