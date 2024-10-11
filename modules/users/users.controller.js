@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
+const { generateToken } = require("../../utils/jwt");
 
 const createUser = async (req, res) => {
     try {
@@ -47,10 +48,14 @@ const loginUser = async (req, res) => {
                 message: "incorrect password"
             });
         } else {
+            console.log(result);
+            const token = generateToken(result);
+
             res.json({
                 sucess: true,
                 status: 200,
-                message: "logged in successfully"
+                message: "logged in successfully",
+                token
             });
         }
 

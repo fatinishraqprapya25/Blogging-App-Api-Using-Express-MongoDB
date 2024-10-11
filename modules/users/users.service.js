@@ -9,7 +9,7 @@ const loginUser = async ({ email, password }) => {
     const user = await User.findOne({ email });
     if (!user) return null;
     const checkPass = await user.comparePassword(password);
-    if (checkPass) return true;
+    if (checkPass) return user;
     return null;
 }
 
