@@ -5,9 +5,10 @@ const userControllers = require("./users.controller");
 const varifyToken = require("../../middlewares/varifyToken");
 
 const upload = require("../../utils/upload");
+const userUtils = require("./users.utils");
 
 // public routes
-userRouter.post("/", upload.single("file"), validateRequest(userValidations.creatUserValidationSchema), userControllers.createUser);
+userRouter.post("/", upload.single("file"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 userRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 // admin approval needed routes
 userRouter.get("/", userControllers.getAllUsers);
