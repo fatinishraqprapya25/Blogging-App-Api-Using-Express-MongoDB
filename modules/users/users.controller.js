@@ -5,22 +5,25 @@ const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
 const sendResponse = require("../../utils/sendResponse");
 const hashPassword = require("../../utils/hashPassword");
+const deleteUploadedFile = require("../../middlewares/deleteUploadedFile")
 
 const createUser = async (req, res) => {
     try {
         const userData = req.body;
         const filename = req.file ? req.file.path : null;
         let filePath;
+        console.log(filename);
         if (filename === null) {
             filePath = path.join(__dirname, "../../uploads", "avatar.jpg");
         } else {
-            filePath = path.join(__dirname, "../../uploads", filename);
+            filePath = path.join(__dirname, "../../", filename);
         }
-
+        
         userData.profilePicture = filePath;
 
         const isEmailTaken = await User.isEmailTaken(userData.email);
         if (isEmailTaken) {
+            deleteUploadedFile(filePath);
             return res.status(400).json({
                 status: 400,
                 message: "Email is already registered!"
