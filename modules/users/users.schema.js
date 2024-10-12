@@ -7,11 +7,6 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: String,
     phone: String,
-    role: {
-        type: String,
-        enum: ["general", "admin"],
-        default: "general"
-    }
 });
 
 // Checking email to handle duplicate emails
