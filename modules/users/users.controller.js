@@ -8,6 +8,8 @@ const hashPassword = require("../../utils/hashPassword");
 const createUser = async (req, res) => {
     try {
         const userData = req.body;
+        const profilePicture = req.file ? req.file.path : null;
+        console.log(profilePicture);
 
         const isEmailTaken = await User.isEmailTaken(userData.email);
         if (isEmailTaken) {
