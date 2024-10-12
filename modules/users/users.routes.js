@@ -4,7 +4,7 @@ const userValidations = require("./users.validation")
 const userControllers = require("./users.controller");
 const varifyToken = require("../../middlewares/varifyToken");
 
-const upload = require("../../config/uploadConfig");
+const upload = require("../../utils/upload");
 
 // public routes
 userRouter.post("/", upload.single("file"), validateRequest(userValidations.creatUserValidationSchema), userControllers.createUser);
