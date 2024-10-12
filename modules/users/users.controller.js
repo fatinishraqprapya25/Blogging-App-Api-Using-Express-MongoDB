@@ -1,3 +1,4 @@
+const path = require("path");
 const config = require("../../config")
 const User = require("./users.schema");
 const userServices = require("./users.service");
@@ -8,8 +9,15 @@ const hashPassword = require("../../utils/hashPassword");
 const createUser = async (req, res) => {
     try {
         const userData = req.body;
-        const profilePicture = req.file ? req.file.path : null;
-        console.log(profilePicture);
+        const filename = req.file ? req.file.path : null;
+        let filePath;
+        if (filename === null) {
+            filePath = path.join(__dirname, "../../uploads", "avatar.jpg");
+        } else {
+            filePath = path.join(__dirname, "../../uploads", filename);
+        }
+
+        userData.profilePicture = filePath;
 
         const isEmailTaken = await User.isEmailTaken(userData.email);
         if (isEmailTaken) {

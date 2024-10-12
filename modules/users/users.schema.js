@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: String,
     phone: String,
+    profilePicture: String
 });
 
 // Checking email to handle duplicate emails
