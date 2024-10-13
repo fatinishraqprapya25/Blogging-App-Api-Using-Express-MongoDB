@@ -1,7 +1,7 @@
 const express = require("express");
 const router = require("./routes");
-const globalErrorHandler = require("./middlewares/globalErrorHandler");
-const notFoundHandler = require("./middlewares/notFoundHandler");
+const globalErrorHandler = require("./errors/globalErrorHandler");
+const notFoundHandler = require("./errors/notFoundHandler");
 
 const app = express();
 app.use(express.json());  // json perser

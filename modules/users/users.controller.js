@@ -5,7 +5,7 @@ const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
 const sendResponse = require("../../utils/sendResponse");
 const hashPassword = require("../../utils/hashPassword");
-const deleteUploadedFile = require("../../middlewares/deleteUploadedFile")
+const deleteUploadedFile = require("../../errors/deleteUploadedFile")
 
 const createUser = async (req, res) => {
     try {
@@ -18,7 +18,7 @@ const createUser = async (req, res) => {
         } else {
             filePath = path.join(__dirname, "../../", filename);
         }
-        
+
         userData.profilePicture = filePath;
 
         const isEmailTaken = await User.isEmailTaken(userData.email);
