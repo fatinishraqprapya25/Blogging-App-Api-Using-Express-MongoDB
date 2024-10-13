@@ -3,6 +3,6 @@ const adminControllers = require("./admin.controller");
 const adminRouter = require("express").Router();
 
 adminRouter.post("/", varifyAdmin, adminControllers.createAdmin);
-adminRouter.patch("/", adminControllers.removeAdmin);
+adminRouter.patch("/:id", varifyAdmin, adminControllers.removeAdmin);
 
 module.exports = adminRouter;

@@ -5,8 +5,8 @@ const createAdmin = async (userDetails) => {
     return result;
 }
 
-const removeAdmin = async (userId) => {
-    const result = await Admin.findByIdAndDelete(userId);
+const removeAdmin = async (adminId) => {
+    const result = await Admin.findByIdAndDelete(adminId);
     return result;
 }
 

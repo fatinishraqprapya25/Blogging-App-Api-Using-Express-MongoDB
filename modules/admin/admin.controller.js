@@ -34,6 +34,7 @@ const createAdmin = async (req, res) => {
 
 const removeAdmin = async (req, res) => {
     const userId = req.params.id;
+    console.log(req.params);
     try {
         const result = await adminServices.removeAdmin(userId);
         sendResponse(res, 200, {
