@@ -14,8 +14,8 @@ const varifyAdmin = async (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token.split(" ")[1], config.jwtSecret);
-        const email = decoded.email;
-        const isAdmin = await Admin.findOne({ email });
+        const id = decoded.id;
+        const isAdmin = await Admin.findOne({ user: id });
 
         if (!isAdmin) {
             const defaultAdminEmail = config.defaultAdminEmail;
@@ -24,7 +24,7 @@ const varifyAdmin = async (req, res, next) => {
                 return next();
             }
 
-            sendResponse(res, 401, {
+            return sendResponse(res, 401, {
                 success: false,
                 message: "access denied, unauthorized"
             });

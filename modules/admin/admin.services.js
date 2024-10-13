@@ -10,5 +10,13 @@ const removeAdmin = async (adminId) => {
     return result;
 }
 
-const adminServices = { createAdmin, removeAdmin };
+const getAllAdmin = async () => {
+    const result = await Admin.find({})
+        .populate("user", "-password")
+        .populate("addedBy")
+
+    return result;
+}
+
+const adminServices = { createAdmin, removeAdmin, getAllAdmin };
 module.exports = adminServices;

@@ -46,10 +46,27 @@ const removeAdmin = async (req, res) => {
         sendResponse(res, 500, {
             success: true,
             message: "failed in removing admin!",
-            data: result
+            error: err
         });
     }
 }
 
-const adminControllers = { createAdmin, removeAdmin };
+const getAllAdmin = async (req, res) => {
+    try {
+        const result = await adminServices.getAllAdmin();
+        sendResponse(res, 200, {
+            success: true,
+            message: "admins retrieved successfully",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: true,
+            message: "failed in retrieving admins!",
+            error: err
+        });
+    }
+}
+
+const adminControllers = { createAdmin, removeAdmin, getAllAdmin };
 module.exports = adminControllers;
