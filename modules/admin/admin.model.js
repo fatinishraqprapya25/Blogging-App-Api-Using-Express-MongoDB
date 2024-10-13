@@ -11,10 +11,6 @@ const adminSchema = new mongoose.Schema({
     }
 });
 
-Admin.statics.varifyAdminBeforeAddingNewAdmin = async (token = "", email = "") => {
-
-}
-
 const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;
