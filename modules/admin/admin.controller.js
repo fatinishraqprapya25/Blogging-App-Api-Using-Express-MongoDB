@@ -1,16 +1,27 @@
 const adminServices = require("./admin.services");
 const sendResponse = require("../../utils/sendResponse");
+const Admin = require("./admin.model");
 
 const createAdmin = async (req, res) => {
     const userDetails = req.body;
     userDetails.addedBy = req.admin.id;
     try {
-        const result = await adminServices.createAdmin(userDetails);
-        sendResponse(res, 200, {
-            success: true,
-            message: "admin added successfully",
-            data: result
+        const isAdmin = await Admin.isAdmin(userDetails.user);
+        if (!isAdmin) {
+            const result = await adminServices.createAdmin(userDetails);
+            return sendResponse(res, 200, {
+                success: true,
+                message: "admin added successfully",
+                data: result
+            });
+        }
+
+        sendResponse(res, 500, {
+            success: false,
+            message: "user already in admin list!",
         });
+
+
     } catch (err) {
         console.log(err);
         sendResponse(res, 500, {

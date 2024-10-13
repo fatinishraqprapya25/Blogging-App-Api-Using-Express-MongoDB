@@ -11,6 +11,13 @@ const adminSchema = new mongoose.Schema({
     }
 });
 
+// Checking email to handle duplicate
+adminSchema.statics.isAdmin = async function (userId) {
+    const user = await this.findOne({ user: userId });
+    return !!user;
+};
+
+
 const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin;
