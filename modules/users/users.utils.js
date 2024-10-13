@@ -1,5 +1,5 @@
 const path = require("path");
-const deleteUploadedFile = require("../../middlewares/deleteUploadedFile");
+const deleteUploadedFile = require("../../errors/deleteUploadedFile");
 
 const userUtils = {};
 
