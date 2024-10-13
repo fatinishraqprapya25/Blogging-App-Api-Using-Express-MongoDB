@@ -3,11 +3,13 @@ const mongoose = require("mongoose");
 const adminSchema = new mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
     addedBy: {
         type: mongoose.Types.ObjectId,
         ref: "Admin",
+        required: true
     }
 });
 
