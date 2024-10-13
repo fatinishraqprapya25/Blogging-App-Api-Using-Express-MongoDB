@@ -1,7 +1,9 @@
 const adminServices = require("./admin.services");
+const sendResponse = require("../../utils/sendResponse");
 
 const createAdmin = async (req, res) => {
     const userDetails = req.body;
+    userDetails.addedBy = req.admin.id;
     try {
         const result = await adminServices.createAdmin(userDetails);
         sendResponse(res, 200, {
@@ -10,10 +12,11 @@ const createAdmin = async (req, res) => {
             data: result
         });
     } catch (err) {
+        console.log(err);
         sendResponse(res, 500, {
-            success: true,
+            success: false,
             message: "failed in adding admin!",
-            data: result
+            error: err
         });
     }
 }

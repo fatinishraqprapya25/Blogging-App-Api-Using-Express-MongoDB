@@ -11,3 +11,4 @@ const removeAdmin = async (userId) => {
 }
 
 const adminServices = { createAdmin, removeAdmin };
+module.exports = adminServices;

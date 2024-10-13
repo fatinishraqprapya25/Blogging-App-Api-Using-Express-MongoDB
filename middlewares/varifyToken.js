@@ -8,7 +8,6 @@ const varifyToken = (req, res, next) => {
     });
 
     try {
-        console.log(token.split(" ")[1])
         const decoded = jwt.verify(token.split(" ")[1], config.jwtSecret);
         req.user = decoded;
         next();
