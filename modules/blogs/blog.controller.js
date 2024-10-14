@@ -43,5 +43,31 @@ const createBlog = async (req, res) => {
     }
 }
 
-const blogControllers = { createBlog };
+const getSingleBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        if (blogId) {
+            const result = await blogsService.getSingleBlog(blogId);
+            sendResponse(res, 200, {
+                success: true,
+                message: "blog fetched successfully",
+                data: result
+            });
+        } else {
+            sendResponse(res, 500, {
+                success: false,
+                message: "please provide blog id",
+            });
+        }
+
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "error occured on fetching blog",
+            error: err
+        });
+    }
+}
+
+const blogControllers = { createBlog, getSingleBlog };
 module.exports = blogControllers;
