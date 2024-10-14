@@ -19,6 +19,9 @@ const blogSchema = new mongoose.Schema({
     isDeleted: {
         type: Boolean,
         default: false
+    },
+    blogImage: {
+        type: String
     }
 }, { timestamps: true });
 
