@@ -5,6 +5,7 @@ const path = require("path");
 const createBlog = async (req, res) => {
     const blogDetails = req.body;
     try {
+        blogDetails.writer = req.user.id;
         const blogImage = req.file.path;
         let filePath;
 
