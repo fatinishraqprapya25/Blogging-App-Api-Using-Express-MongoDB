@@ -20,3 +20,4 @@ const createBlog = async (req, res) => {
 }
 
 const blogControllers = { createBlog };
+module.exports = blogControllers;
