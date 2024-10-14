@@ -1,11 +1,20 @@
 const blogsService = require("./blogs.service");
 const sendResponse = require("../../utils/sendResponse");
 const path = require("path");
+const Admin = require("../admin/admin.model");
 
 const createBlog = async (req, res) => {
     const blogDetails = req.body;
     try {
         blogDetails.writer = req.user.id;
+        delete blogDetails.isApproved;
+        const isAdmin = await Admin.isAdmin(req.user.id);
+        if (isAdmin) {
+            blogDetails.isApproved = true
+        }
+
+        console.log(blogDetails)
+
         const blogImage = req.file.path;
         let filePath;
 
