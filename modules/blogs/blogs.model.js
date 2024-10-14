@@ -16,6 +16,10 @@ const blogSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    isApproved: {
+        type: Boolean,
+        default: false
+    },
     isDeleted: {
         type: Boolean,
         default: false

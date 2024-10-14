@@ -1,7 +1,7 @@
 const Blog = require("./blogs.model");
 
-const createBlog = async (blogDetail) => {
-    const result = await Blog.create(blogDetail);
+const createBlog = async (blogDetails) => {
+    const result = await Blog.create(blogDetails);
     return result;
 }
 
@@ -49,4 +49,5 @@ const updateBlog = async (blogId, update) => {
     return result;
 }
 
-module.exports = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs };
+const blogsService = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs };
+module.exports = blogsService;
