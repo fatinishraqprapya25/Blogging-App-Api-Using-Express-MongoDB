@@ -6,7 +6,7 @@ const router = require("express").Router();
 const routes = [
     { path: "/user", module: userRouter },
     { path: "/admin", module: adminRouter },
-    { path: "/blog", module: blogRouter }
+    { path: "/blogs", module: blogRouter }
 ]
 
 routes.forEach(r => router.use(r.path, r.module));

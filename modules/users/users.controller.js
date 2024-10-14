@@ -12,9 +12,8 @@ const createUser = async (req, res) => {
         const userData = req.body;
         const filename = req.file ? req.file.path : null;
         let filePath;
-        console.log(filename);
         if (filename === null) {
-            filePath = path.join(__dirname, "../../uploads", "avatar.jpg");
+            filePath = path.join(__dirname, "../../uploads/profile", "avatar.jpg");
         } else {
             filePath = path.join(__dirname, "../../", filename);
         }
