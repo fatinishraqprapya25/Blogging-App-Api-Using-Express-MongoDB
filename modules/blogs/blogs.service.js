@@ -35,7 +35,7 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
 }
 
 const getSingleBlog = async (blogId) => {
-    const result = await Blog.findById(blogId);
+    const result = await Blog.findById(blogId).populate("writer");
     return result;
 }
 
