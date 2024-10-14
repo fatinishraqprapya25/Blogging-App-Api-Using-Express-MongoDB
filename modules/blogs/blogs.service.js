@@ -6,24 +6,31 @@ const createBlog = async (blogDetails) => {
 }
 
 const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "desc") => {
+    const validPage = Math.max(parseInt(page, 10), 1);
+    const validLimit = Math.max(parseInt(limit, 10), 1);
+
     const options = {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        sort: { sorBy: sortOrder === "asc" ? 1 : -1 }
+        page: validPage,
+        limit: validLimit,
+        sort: { createdAt: sortOrder === "asc" ? 1 : -1 }
     };
 
-    const searchFilter = searchQuery ? {
-        isDeleted: false,
-        $or: [
-            { title: { $regex: searchQuery, $options: "i" } },
-            { description: { $regex: searchQuery, $options: "i" } }
-        ]
-    } : { isDeleted: false }
+    console.log(options);
+
+    const searchFilter = searchQuery
+        ? {
+            isDeleted: false,
+            $or: [
+                { title: { $regex: searchQuery, $options: "i" } },
+                { description: { $regex: searchQuery, $options: "i" } }
+            ]
+        }
+        : { isDeleted: false };
 
     const blogs = await Blog.find(searchFilter)
         .sort(options.sort)
         .skip((options.page - 1) * options.limit)
-        .limit(options.limit)
+        .limit(options.limit);
 
     const totalBlogs = await Blog.countDocuments(searchFilter);
 
@@ -31,8 +38,8 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
         totalBlogs,
         pages: Math.ceil(totalBlogs / options.limit),
         blogs
-    }
-}
+    };
+};
 
 const getSingleBlog = async (blogId) => {
     const result = await Blog.findById(blogId).populate("writer");

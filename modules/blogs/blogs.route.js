@@ -8,6 +8,8 @@ const blogUtils = require("./blogs.utils")
 
 blogRouter.post("/", varifyToken, upload("blogs").single("file"), validateRequest(blogValidations.blogCreationValidationSchema, blogUtils.deteteUploadedPhotoIfValidationFailed), blogControllers.createBlog);
 
-blogRouter.get("/:id", varifyToken, blogControllers.getSingleBlog)
+blogRouter.get("/:id", varifyToken, blogControllers.getSingleBlog);
+
+blogRouter.get("/", varifyToken, blogControllers.getAllBlogOrSearch);
 
 module.exports = blogRouter;

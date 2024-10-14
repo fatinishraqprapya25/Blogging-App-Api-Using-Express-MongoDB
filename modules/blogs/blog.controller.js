@@ -69,5 +69,27 @@ const getSingleBlog = async (req, res) => {
     }
 }
 
-const blogControllers = { createBlog, getSingleBlog };
+const getAllBlogOrSearch = async (req, res) => {
+    try {
+        const query = req.query.query ? req.query.query : "";
+        const page = req.query.page;
+        const limit = req.query.limit ? req.query.limit : 10;
+        const sortBy = req.query.sortBy ? req.query.sortBy : "asc";
+        const result = await blogsService.getAllBlogs(query, page, limit, sortBy);
+
+        sendResponse(res, 200, {
+            success: true,
+            message: "blogs retrieved successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "failed retrieving blogs",
+            error: err
+        });
+    }
+}
+
+const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch };
 module.exports = blogControllers;
