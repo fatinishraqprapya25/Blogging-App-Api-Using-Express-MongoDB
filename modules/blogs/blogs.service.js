@@ -1,4 +1,4 @@
-const Blog = require("./blogs.model")
+const Blog = require("./blogs.model");
 
 const createBlog = async (blogDetail) => {
     const result = await Blog.create(blogDetail);
@@ -25,11 +25,11 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
         .skip((options.page - 1) * options.limit)
         .limit(options.limit)
 
-    const totalBlogs = Blog.countDocuments(searchFilter);
+    const totalBlogs = await Blog.countDocuments(searchFilter);
 
     return {
         totalBlogs,
-        pages: totalBlogs / options.limit,
+        pages: Math.ceil(totalBlogs / options.limit),
         blogs
     }
 }
@@ -49,4 +49,4 @@ const updateBlog = async (blogId, update) => {
     return result;
 }
 
-module.exports = { createBlog, getSingleBlog, deleteBlog, updateBlog };
+module.exports = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs };
