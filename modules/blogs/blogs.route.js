@@ -3,3 +3,5 @@ const varifyToken = require("../../middlewares/varifyToken");
 const blogControllers = require("./blog.controller");
 
 blogRouter.post("/", varifyToken, blogControllers.createBlog);
+
+module.exports = blogRouter;
