@@ -15,8 +15,6 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
         sort: { createdAt: sortOrder === "asc" ? 1 : -1 }
     };
 
-    console.log(options);
-
     const searchFilter = searchQuery
         ? {
             isDeleted: false,
