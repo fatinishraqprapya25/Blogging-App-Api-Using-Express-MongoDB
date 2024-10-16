@@ -13,8 +13,6 @@ const createBlog = async (req, res) => {
             blogDetails.isApproved = true
         }
 
-        console.log(blogDetails)
-
         const blogImage = req.file.path;
         let filePath;
 
