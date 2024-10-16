@@ -22,7 +22,8 @@ const createComment = async (req, res) => {
 
 const readComments = async (req, res) => {
     try {
-        const comments = await commentServices.readComments();
+        const { postId } = req.params;
+        const comments = await commentServices.readComments({ postId });
         return sendResponse(res, 200, {
             success: true,
             message: "comments retrieved successfully",
