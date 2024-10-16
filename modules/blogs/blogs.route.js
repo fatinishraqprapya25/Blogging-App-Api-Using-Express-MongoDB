@@ -12,4 +12,6 @@ blogRouter.get("/:id", varifyToken, blogControllers.getSingleBlog);
 
 blogRouter.get("/", varifyToken, blogControllers.getAllBlogOrSearch);
 
+blogRouter.delete("/:id", varifyToken, blogUtils.checkAuthor, blogControllers.deleteBlog);
+
 module.exports = blogRouter;

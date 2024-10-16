@@ -89,5 +89,23 @@ const getAllBlogOrSearch = async (req, res) => {
     }
 }
 
-const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch };
+const deleteBlog = async (req, res) => {
+    try {
+        const blogId = req.params.id;
+        const result = await blogsService.deleteBlog(blogId);
+        sendResponse(res, 200, {
+            success: true,
+            message: "blog deleted successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "failed deleting blog!",
+            error: err
+        });
+    }
+}
+
+const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch, deleteBlog };
 module.exports = blogControllers;
