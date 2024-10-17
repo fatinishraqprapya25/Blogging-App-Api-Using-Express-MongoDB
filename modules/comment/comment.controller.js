@@ -95,6 +95,7 @@ const deleteComment = async (req, res) => {
 const createReply = async (req, res) => {
     try {
         const replyDetails = req.body;
+        replyDetails.userId = req.user.id;
         const { commentId } = req.params;
         const result = await commentServices.createReply(commentId, replyDetails);
 

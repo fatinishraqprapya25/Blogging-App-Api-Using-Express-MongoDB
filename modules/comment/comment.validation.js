@@ -16,6 +16,12 @@ const updateComment = z.object({
     })
 });
 
-const commentValidations = { createComment, updateComment };
+const replyComment = z.object({
+    body: z.object({
+        text: z.string().min(1, "Comment text is required").trim(),
+    })
+});
+
+const commentValidations = { createComment, updateComment, replyComment };
 
 module.exports = commentValidations;
