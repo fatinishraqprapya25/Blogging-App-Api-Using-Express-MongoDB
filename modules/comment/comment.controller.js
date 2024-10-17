@@ -92,11 +92,40 @@ const deleteComment = async (req, res) => {
     }
 };
 
+const createReply = async (req, res) => {
+    try {
+        const replyDetails = req.body;
+        const { commentId } = req.params;
+        const result = await commentServices.createReply(commentId, replyDetails);
+
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "failed replying",
+            });
+        }
+
+        return sendResponse(res, 200, {
+            success: true,
+            message: "reply sent",
+            data: result
+        });
+
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "failed replying",
+            error: err
+        });
+    }
+}
+
 const commentControllers = {
     createComment,
     readComments,
     updateComment,
     deleteComment,
+    createReply
 };
 
 module.exports = commentControllers;

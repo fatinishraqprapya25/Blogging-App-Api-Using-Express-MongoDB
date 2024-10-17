@@ -20,7 +20,14 @@ const deleteComment = async (commentId) => {
     return result;
 }
 
-const commentServices = { createComment, readComments, updateComment, deleteComment };
+const createReply = async (commentId, replyDetails) => {
+    const comment = await Comment.findById(commentId);
+    comment.replies.push(replyDetails);
+    const updatedComment = await comment.save();
+    return updatedComment;
+}
+
+const commentServices = { createComment, readComments, updateComment, deleteComment, createReply };
 
 module.exports = commentServices;
 
