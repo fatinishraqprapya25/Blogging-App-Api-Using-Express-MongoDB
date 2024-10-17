@@ -16,4 +16,6 @@ commentRouter.patch("/:commentId", varifyToken, commentUtils.checkCommentAuthorF
 
 commentRouter.post("/reply/:commentId", varifyToken, validateRequest(commentValidations.replyComment), commentControllers.createReply);
 
+commentRouter.delete("/reply/:commentId/:replyId", varifyToken, commentUtils.checkAdminOrAuthorForDelete, commentControllers.deleteReply);
+
 module.exports = commentRouter;

@@ -35,7 +35,14 @@ const deleteReply = async (commentId, replyId) => {
     return deletedComment;
 }
 
-const commentServices = { createComment, readComments, updateComment, deleteComment, createReply, deleteReply };
+const commentServices = {
+    createComment,
+    readComments,
+    updateComment,
+    deleteComment,
+    createReply,
+    deleteReply
+};
 
 module.exports = commentServices;
 
