@@ -121,12 +121,40 @@ const createReply = async (req, res) => {
     }
 }
 
+const deleteReply = async (req, res) => {
+    try {
+        const { commentId, replyId } = req.params;
+        const result = await commentServices.deleteReply(commentId, replyId);
+
+        if (!result) {
+            return sendResponse(res, 404, {
+                success: false,
+                message: "Reply or Comment not found",
+            });
+        }
+
+        return sendResponse(res, 200, {
+            success: true,
+            message: "Reply deleted successfully",
+            data: result,
+        });
+    } catch (err) {
+        return sendResponse(res, 500, {
+            success: false,
+            message: "Failed to delete reply",
+            error: err,
+        });
+    }
+};
+
+
 const commentControllers = {
     createComment,
     readComments,
     updateComment,
     deleteComment,
-    createReply
+    createReply,
+    deleteReply
 };
 
 module.exports = commentControllers;
