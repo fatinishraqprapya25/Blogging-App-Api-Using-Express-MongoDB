@@ -25,3 +25,12 @@ A simple and usefull blogging platform that allows users to **create, read, upda
    cd blogging-website
 
 ### ⚙️ Environment Setup (.env File)
+Create a .env file in the root directory to store your environment variables. This is must to run the entire application.
+### Example `.env` File:
+
+```bash
+PORT=5000
+DATABASE_URL=<mongodb database string>
+JWT_SECRET=your_jwt_secret_key
+DEFAULT_ADMIN=default admin
+BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
