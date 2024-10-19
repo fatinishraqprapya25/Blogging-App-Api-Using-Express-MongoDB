@@ -239,4 +239,35 @@ Request Body:
      }
  }
  ```
+    ## 7. Create Comment on Blog
+  **Url**: `Base Url/comments`
+  **Method**: `POST`
+ Provide authorization token in the request header & send request simliar to the example given below.
+   **Request Body**
+  ```json
+ {
+     "blogId": "mongoDB_ID",
+     "text": "your comment here...",
+ }
+ ```
+   **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "comment created successfully",
+     "data": {} //new comment here
+ }
+ ```
  
+## 8. Read Comments
+  **Url**: `Base Url/comments/:postId`
+  **Method**: `GET`
+ Provide authorization token in the request header & **blogId** as post id in the request params.
+   **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "comments retrieved successfully",
+     "data": [] //array of comments here
+ }
+ ```
