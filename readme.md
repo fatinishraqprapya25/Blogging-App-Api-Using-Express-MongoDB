@@ -44,7 +44,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
   -**Url**: `Base Url/user`
   -**.Method**: `POST`
 
-  - **Response:**
+  - **Response: (if u provide all informations)**
   ```json
   {
     "success": true,
@@ -56,5 +56,14 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
         "email": "johndoe@gmail.com",
         "phone": "01707248**"
     }
+  }
+``
+
+  - **Response: (if u don't provide all informations)**
+  ```json
+  {
+    "success": false,
+    "message": "Failed in creating users",
+    "error": {}
   }
 ```

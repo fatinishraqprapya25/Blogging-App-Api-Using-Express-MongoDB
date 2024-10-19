@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
         if (isEmailTaken) {
             deleteUploadedFile(filePath);
             return res.status(400).json({
-                status: 400,
+                success: false,
                 message: "Email is already registered!"
             });
         }
@@ -32,17 +32,17 @@ const createUser = async (req, res) => {
         userData.password = await hashPassword(userData.password, Number(config.bcryptCircleCount));
 
         const result = await userServices.createUserIntoDb(userData);
-        res.json({
-            status: 200,
+        res.status(200).json({
+            success: true,
             message: "User is Registered successfully!",
             data: result
         });
 
     } catch (err) {
         res.status(500).json({
-            status: 500,
+            success: false,
             message: "Failed in creating users",
-            error: err.message
+            error: err
         });
     }
 };
