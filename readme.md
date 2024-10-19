@@ -41,8 +41,20 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 ## Base Url: https://yourdomain.com/api/v1
 
 ## 1. Register a User
-  -**Url**: `Base Url/user`
-  -**.Method**: `POST`
+  **Url**: `Base Url/user`
+  **Method**: `POST`
+  
+In the Request Body you have to provide some user informations to register a user. A Demo Information is given below.
+--Request Body: ```json 
+{
+    "firstName": "john",
+    "lastName": "doe",
+    "password": "yourpassword",
+    "email": "john.doe@gmail.com",
+    "phone": "88017740445**",
+    "profilePic": "file"
+}
+profilePic is optional. If you don't provide it pick a random one.
 
   - **Response: (success)**
   ```json
@@ -57,7 +69,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
         "phone": "01707248**"
     }
   }
-`
+```
 
   - **Response: (failure)**
   ```json
@@ -67,3 +79,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
     "error": {}
   }
 ```
+
+## 2. Login a User
+  -**Url**: `Base Url/user/login`
+  -**.Method**: `POST`

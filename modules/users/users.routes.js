@@ -9,7 +9,7 @@ const userUtils = require("./users.utils");
 const varifyAdmin = require("../../middlewares/varifyAdmin");
 
 // public routes
-userRouter.post("/", upload("profile").single("file"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
+userRouter.post("/", upload("profile").single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 userRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 // admin approval needed routes
 userRouter.get("/", varifyAdmin, userControllers.getAllUsers);
