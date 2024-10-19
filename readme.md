@@ -149,5 +149,32 @@ Request Body:
   }
  ```
  
+  ## 4. Creating Blog From User
+  **Url**: `Base Url/blogs/`
+  **Method**: `POST`
+  To create a new blog user must be logged in and have to provide token via request header. User must provide blog contents and **Image** as well in the request body.For example, a demo request is given below.
+  
+   **Token in the header be like:**
+ ```bash
+ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ ```
+  **Request body**
+ ```json
+ {
+     "title": "JavaScript Closure",
+     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley",
+     "blogImage": "file"
+ }
+ ```
+ If you provide all the informations in the correct way, you will get a response similiar to the one below.
+ 
+  **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "blog created successfully",
+     "data": "blog Details"
+ }
+ ```
  
  
