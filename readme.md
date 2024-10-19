@@ -44,7 +44,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
   -**Url**: `Base Url/user`
   -**.Method**: `POST`
 
-  - **Response: (if u provide all informations)**
+  - **Response: (success)**
   ```json
   {
     "success": true,
@@ -59,7 +59,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
   }
 `
 
-  - **Response: (if u don't provide all informations)**
+  - **Response: (failure)**
   ```json
   {
     "success": false,
