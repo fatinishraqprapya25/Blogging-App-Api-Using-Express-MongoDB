@@ -36,7 +36,7 @@ DEFAULT_ADMIN=default admin
 BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 ```
 
-#🚀API Endpoints
+## 🚀API Endpoints
 ## Base Url: https://yourdomain.com/api/v1
 
 ## 1. Register a User
