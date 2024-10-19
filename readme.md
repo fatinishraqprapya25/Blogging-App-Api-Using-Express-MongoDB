@@ -41,5 +41,20 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 ## Base Url: https://yourdomain.com/api/v1
 
 ## 1. Register a User
-  **.Url**: `Base Url/user`
-  **.Method**: `POST`
+  -**Url**: `Base Url/user`
+  -**.Method**: `POST`
+
+  - **Response:**
+  ```json
+  {
+    "success": true,
+    "message": "User is Registered successfully!",
+    "data": {
+        "_id": "mongodb id",
+        "firstName": "john",
+        "lastName": "doe",
+        "email": "johndoe@gmail.com",
+        "phone": "01707248**"
+    }
+  }
+```
