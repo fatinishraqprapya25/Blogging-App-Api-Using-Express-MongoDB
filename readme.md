@@ -1,12 +1,11 @@
 # 📝 Blogging Website
 
-A simple and powerful blogging platform that allows users to **create, read, update, and delete (CRUD)** blog posts. This project follows a **modular monolithic architecture** built with **Express.js** and **MongoDB** (Mongoose). 
+A simple and usefull blogging platform that allows users to **create, read, update, and delete (CRUD)** blog posts. Only the admin can create blogs directly. But if a user create blogs, admin approval is needed to publish the blog. This project follows **modular and dry principles** built with **Express.js** and **MongoDB** (Mongoose). 
 
 ## 🚀 Features
 - User Authentication (Login/Signup)
 - Create, Read, Update, and Delete Blogs
-- Rich Text Editor for Blog Content
-- Categories and Tags for Blogs
+- Admin Approval System for Blogs
 - Responsive API with error handling
 - Modular Code Architecture (Scalable and Maintainable)
 
@@ -15,7 +14,6 @@ A simple and powerful blogging platform that allows users to **create, read, upd
 - **Database:** MongoDB
 - **Authentication:** JWT (JSON Web Token)
 - **API Testing:** Postman
-- **Hosting:** (Optional) Render, Heroku, or Vercel
 
 ---
 
