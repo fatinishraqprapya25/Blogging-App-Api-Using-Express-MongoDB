@@ -24,4 +24,4 @@ A simple and usefull blogging platform that allows users to **create, read, upda
    git clone https://github.com/your-username/blogging-website.git
    cd blogging-website
 
-# ⚙️ Environment Setup (.env File)
+### ⚙️ Environment Setup (.env File)
