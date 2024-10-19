@@ -43,8 +43,9 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 ## 1. Register a User
   **Url**: `Base Url/user`
   **Method**: `POST`
-  
+ 
 In the Request Body you have to provide some user informations to register a user. A Demo Information is given below.
+
 --Request Body: ```json 
 {
     "firstName": "john",
@@ -80,6 +81,73 @@ profilePic is optional. If you don't provide it pick a random one.
   }
 ```
 
-## 2. Login a User
-  -**Url**: `Base Url/user/login`
-  -**.Method**: `POST`
+## 2. Login User
+  **Url**: `Base Url/user/login`
+  **Method**: `POST`
+  
+In the Request Body you have to provide some user email & password to be logged in. A Demo is given below.
+
+Request Body: 
+```json 
+{
+    "email": "john.doe@gmail.com",
+    "password": "yourpassword"
+}
+```
+ **Response: (Success)**
+  ```json
+  {
+    "success": true,
+    "message": "user logged in successfully!",
+    "token": "it will provide a token"
+  }
+ ```
+ 
+ If u provide wrong password, it will also respond. A demo response is given below.
+  **Response: (failure)**
+ ```json
+  {
+    "success": false,
+    "message": "incorrect password",
+  }
+ ```
+ ## 3. Update User Informations
+  **Url**: `Base Url/user/`
+  **Method**: `PATCH`
+
+ To update user informations, you have to login. You have to provide a authorization token in the request header. Make sure that you follow the Bearer Standard. You have to provide the new informations in the request body. A demo is given below.
+ 
+ **Token in the header be like:**
+ ```bash
+ authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ ```
+ **Request body**
+ ```json
+ {
+     "firstName": "Kuddus"
+ }
+ ```
+ If the provided token is valid It will update the firstName to 'Kuddus' and respond the updated data.
+
+  **Response: (Success)**
+  
+  ```json
+  {
+    "success": true,
+    "message": "User updated successfully!",
+    "data": {}
+  }
+ ```
+ 
+ If the provided token is invalid, it will not update user informations.
+ 
+   **Response: (failure)**
+ ```json
+  {
+    "success": false,
+    "message": "invalid token",
+  }
+ ```
+ 
+ 
+ 
