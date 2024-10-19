@@ -177,4 +177,66 @@ Request Body:
  }
  ```
  
+   ## 4. Finding Blog With Id
+  **Url**: `Base Url/blogs/:id`
+  **Method**: `GET`
+  Pass authorization token in the request header & id in the request parameter to get specific blog.A demo response is given below.
+    **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "blog created successfully",
+     "data": {
+         "writter": "mongoDB Id",
+         "title": "JavaScript Asynchronous Behavior",
+         "description": "the description here",
+         "isApproved": true,
+         "blogImage": "img" // img path
+     }
+ }
+ ```
+   ## 5. Searching Blogs / Fetching Blogs
+  **Url**: `Base Url/blogs/`
+  **Method**: `GET`
+  First, you have to provide authorization token in the request header. Just after doing that if you hit the api, you will get response. But there are some other query params. there is a specific query params called **query** which handles the search functionality. There is also some **limit**, **page** & **sortBy** property in the request query object. 
+ 
+**Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "blog created successfully",
+     "data": [{
+         "writter": "mongoDB Id",
+         "title": "JavaScript Asynchronous Behavior",
+         "description": "the description here",
+         "isApproved": true,
+         "blogImage": "img" // img path
+     },{
+         "writter": "mongoDB Id",
+         "title": "JavaScript Asynchronous Behavior",
+         "description": "the description here",
+         "isApproved": true,
+         "blogImage": "img" // img path
+     }]
+ }
+ ```
+ 
+   ## 6. Deleting Blog
+  **Url**: `Base Url/blogs/:id`
+  **Method**: `DELETE`
+  First, you have to provide authorization token in the request header. Only the post author and the admin can delete the blog.
+  **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "blog deleted successfully!",
+     "data": {
+         "writter": "mongoDB Id",
+         "title": "JavaScript Asynchronous Behavior",
+         "description": "the description here",
+         "isApproved": true,
+         "blogImage": "img" // img path
+     }
+ }
+ ```
  
