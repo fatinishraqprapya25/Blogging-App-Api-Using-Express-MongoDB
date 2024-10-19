@@ -57,7 +57,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
         "phone": "01707248**"
     }
   }
-``
+`
 
   - **Response: (if u don't provide all informations)**
   ```json
