@@ -5,7 +5,7 @@ const validateRequest = require("../../middlewares/validateRequest");
 const adminCreationValidationSchema = require("./admin.validation");
 
 adminRouter.post("/", varifyAdmin, validateRequest(adminCreationValidationSchema), adminControllers.createAdmin);
-adminRouter.patch("/:id", varifyAdmin, adminControllers.removeAdmin);
+adminRouter.delete("/:id", varifyAdmin, adminControllers.removeAdmin);
 adminRouter.get("/", varifyAdmin, adminControllers.getAllAdmin);
 
 module.exports = adminRouter;

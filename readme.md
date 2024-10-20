@@ -21,7 +21,7 @@ A simple and usefull blogging platform that allows users to **create, read, upda
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/blogging-website.git
+   git clone https://github.com/fatinishraqprapya25/Blogging-App-Api-Using-Express-MongoDB
    cd blogging-website
 
 ### ⚙️ Environment Setup (.env File)
@@ -38,7 +38,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 
 
 # 🚀API Endpoints
-## Base Url: https://yourdomain.com/api/v1
+## Base Url: not published yet
 
 ## 1. Register a User
   **Url**: `Base Url/user`
@@ -334,6 +334,46 @@ Request Body:
      "success": true,
      "message": "reply deleted successfully!",
      "data": {} // all the comments
+ }
+ ```
+ 
+   # Admin Panel
+   **Functionalities**: Admins can create and publish blogs without approval. They can also add or remove other admins from the admin panel. After the first deployment, a default admin (set in the **.env** file) will be available. 
+   
+ ## 1. Create Admin
+  **Url**: `Base Url/admin/
+  **Method**: `POST`
+  Only admin & default admin can create admin. Provide authorization token in the request header. A Demo Request is given below.
+   **Request body**
+  ```json
+ {
+     "user": "User Id",
+ }
+ ```
+  **Response: (success)**
+```json
+ {
+     "success": true,
+     "message": "admin created successfully",
+     "data": {} // new admin here
+ }
+ ```
+ 
+  ## 2. Remove Admin
+  **Url**: `Base Url/admin/:id
+  **Method**: `DELETE`
+  Only admin & default admin can remove another admin.
+  
+   ## 3. Get All Admins
+  **Url**: `Base Url/admin/`
+  **Method**: `DELETE`
+  Only admin & default admin can remove another admin.
+**Response: (success)**
+```json
+ {
+     "success": true,
+     "message": "admins retrieved successfully",
+     "data": [] // all the admins here
  }
  ```
   
