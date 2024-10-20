@@ -271,3 +271,24 @@ Request Body:
      "data": [] //array of comments here
  }
  ```
+ 
+ ## 9. Update Comment
+  **Url**: `Base Url/comments/:commentId`
+  **Method**: `PATCH`
+  Only the comment creator can update the comment. Pass the token as authorization in the request header.
+     **Request body**
+  ```json
+ {
+     "text": "new comment",
+ }
+ ```
+ 
+    **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "comment updated successfully",
+     "data": {} //updated comment
+ }
+ ```
+  
