@@ -291,4 +291,49 @@ Request Body:
      "data": {} //updated comment
  }
  ```
+  ## 10. Delete Comment
+  **Url**: `Base Url/comments/:commentId`
+  **Method**: `DELETE`
+  Only admin & comment creator can delete comments.
+  
+**Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "comment deleted successfully",
+     "data": {} //deleted comment
+ }
+ ```
+ 
+   ## 11. Create Reply Comment
+  **Url**: `Base Url/comments/reply/:commentId`
+  **Method**: `POST`
+  Any logged in user can reply comments.
+ **Request body**
+  ```json
+ {
+     "text": "new reply",
+ }
+ ```
+**Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "reply sent",
+     "data": {} //all the replies
+ }
+ ```
+ 
+   ## 11. Delete Reply
+  **Url**: `Base Url/comments/reply/:commentId/:replyId`
+  **Method**: `POST`
+  Only admin & reply creator can delete replies.
+ **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "reply deleted successfully!",
+     "data": {} // all the comments
+ }
+ ```
   
