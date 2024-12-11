@@ -6,9 +6,9 @@ const commentValidations = require("./comment.validation");
 
 const commentRouter = require("express").Router();
 
-commentRouter.post("", varifyToken, validateRequest(commentValidations.createComment), commentControllers.createComment);
+commentRouter.post("/", varifyToken, validateRequest(commentValidations.createComment), commentControllers.createComment);
 
-commentRouter.get("/:postId", varifyToken, commentControllers.readComments);
+commentRouter.get("/:postId", commentControllers.readComments);
 
 commentRouter.delete("/:commentId", varifyToken, commentUtils.checkAdminOrAuthorForDelete, commentControllers.deleteComment);
 

@@ -241,7 +241,7 @@ Request Body:
      }
  }
  ```
-    ## 7. Create Comment on Blog
+  ## 7. Create Comment on Blog
   **Url**: `Base Url/comments`
   **Method**: `POST`
  Provide authorization token in the request header & send request simliar to the example given below.
