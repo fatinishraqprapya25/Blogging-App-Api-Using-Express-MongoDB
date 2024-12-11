@@ -46,11 +46,19 @@ const getSingleBlog = async (req, res) => {
         const blogId = req.params.id;
         if (blogId) {
             const result = await blogsService.getSingleBlog(blogId);
-            sendResponse(res, 200, {
-                success: true,
-                message: "blog fetched successfully",
-                data: result
-            });
+            if (!result) {
+                sendResponse(res, 404, {
+                    success: false,
+                    message: "blog not found!",
+                });
+            } else {
+                sendResponse(res, 200, {
+                    success: true,
+                    message: "blog fetched successfully",
+                    data: result
+                });
+            }
+            
         } else {
             sendResponse(res, 500, {
                 success: false,

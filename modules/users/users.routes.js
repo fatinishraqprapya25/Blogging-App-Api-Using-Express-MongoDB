@@ -16,6 +16,7 @@ const varifyAdmin = require("../../middlewares/varifyAdmin");
 // auth routes
 authRouter.post("/register", upload("profile").single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
+
 // admin approval needed routes
 userRouter.get("/", varifyAdmin, userControllers.getAllUsers);
 userRouter.get("/:id", varifyAdmin, userControllers.getSingleUser);

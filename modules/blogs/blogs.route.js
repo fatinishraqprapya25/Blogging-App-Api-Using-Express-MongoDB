@@ -4,11 +4,11 @@ const blogControllers = require("./blog.controller");
 const upload = require("../../utils/upload");
 const validateRequest = require("../../middlewares/validateRequest");
 const blogValidations = require("./blogs.validation");
-const blogUtils = require("./blogs.utils")
+const blogUtils = require("./blogs.utils");
 
 blogRouter.post("/", varifyToken, upload("blogs").single("blogImage"), validateRequest(blogValidations.blogCreationValidationSchema, blogUtils.deteteUploadedPhotoIfValidationFailed), blogControllers.createBlog);
 
-blogRouter.get("/:id", varifyToken, blogControllers.getSingleBlog);
+blogRouter.get("/:id", blogControllers.getSingleBlog);
 
 blogRouter.get("/", varifyToken, blogControllers.getAllBlogOrSearch);
 
