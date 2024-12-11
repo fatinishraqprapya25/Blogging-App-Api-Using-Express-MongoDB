@@ -18,6 +18,7 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
     const searchFilter = searchQuery
         ? {
             isDeleted: false,
+            isApproved: true,
             $or: [
                 { title: { $regex: searchQuery, $options: "i" } },
                 { description: { $regex: searchQuery, $options: "i" } }
