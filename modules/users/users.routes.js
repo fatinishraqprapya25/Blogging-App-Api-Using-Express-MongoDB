@@ -13,7 +13,7 @@ const upload = require("../../utils/upload");
 const userUtils = require("./users.utils");
 const varifyAdmin = require("../../middlewares/varifyAdmin");
 
-// public routes
+// auth routes
 authRouter.post("/register", upload("profile").single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 // admin approval needed routes
