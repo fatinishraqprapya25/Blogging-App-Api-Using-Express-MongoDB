@@ -56,6 +56,7 @@ In the Request Body you have to provide some user informations to register a use
     "phone": "88017740445**",
     "profilePic": "file"
 }
+```
 profilePic is optional. If you don't provide it pick a random one.
 
   - **Response: (success)**
