@@ -9,8 +9,7 @@ const blogUtils = require("./blogs.utils");
 blogRouter.post("/", varifyToken, upload("blogs").single("blogImage"), validateRequest(blogValidations.blogCreationValidationSchema, blogUtils.deteteUploadedPhotoIfValidationFailed), blogControllers.createBlog);
 
 blogRouter.get("/:id", blogControllers.getSingleBlog);
-
-blogRouter.get("/", varifyToken, blogControllers.getAllBlogOrSearch);
+blogRouter.get("/", blogControllers.getAllBlogOrSearch);
 
 blogRouter.delete("/:id", varifyToken, blogUtils.checkAuthor, blogControllers.deleteBlog);
 
