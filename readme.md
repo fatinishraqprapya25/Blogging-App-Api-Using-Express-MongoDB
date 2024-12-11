@@ -41,12 +41,13 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 ## Base Url: not published yet
 
 ## 1. Register a User
-  **Url**: `Base Url/user`
+  **Url**: `Base Url/auth/register`
   **Method**: `POST`
  
 In the Request Body you have to provide some user informations to register a user. A Demo Information is given below.
 
---Request Body: ```json 
+--Request Body: 
+```json 
 {
     "firstName": "john",
     "lastName": "doe",
@@ -82,7 +83,7 @@ profilePic is optional. If you don't provide it pick a random one.
 ```
 
 ## 2. Login User
-  **Url**: `Base Url/user/login`
+  **Url**: `Base Url/auth/login`
   **Method**: `POST`
   
 In the Request Body you have to provide some user email & password to be logged in. A Demo is given below.
