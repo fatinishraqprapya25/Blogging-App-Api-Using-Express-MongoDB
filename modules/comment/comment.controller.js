@@ -16,7 +16,7 @@ const createComment = async (req, res) => {
             success: false,
             message: "failed in creating comment",
             error
-        })
+        });
     }
 };
 
