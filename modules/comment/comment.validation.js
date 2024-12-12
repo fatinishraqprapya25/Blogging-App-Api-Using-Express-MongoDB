@@ -22,6 +22,12 @@ const replyComment = z.object({
     })
 });
 
-const commentValidations = { createComment, updateComment, replyComment };
+const updateReplyComment = z.object({
+    body: z.object({
+        text: z.string().min(1, "Comment text is required").trim().optional(),
+    })
+});
+
+const commentValidations = { createComment, updateComment, replyComment, updateReplyComment };
 
 module.exports = commentValidations;
