@@ -94,5 +94,31 @@ const approveBlog = async (req, res) => {
     }
 }
 
-const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog };
+const disapproveBlog = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await blogServices.updateBlog(id,
+            { isApproved: false });
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "failed to disapprove blog!",
+                error: err
+            });
+        }
+        sendResponse(res, 200, {
+            success: true,
+            message: "blog disapproved successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "Server Error Occured to disapprove blog",
+            error: err
+        });
+    }
+}
+
+const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog, disapproveBlog };
 module.exports = adminControllers;
