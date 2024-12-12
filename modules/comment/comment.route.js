@@ -18,6 +18,6 @@ commentRouter.post("/reply/:commentId", varifyToken, validateRequest(commentVali
 
 commentRouter.delete("/reply/:commentId/:replyId", varifyToken, commentUtils.checkAdminOrAuthorForDelete, commentControllers.deleteReply);
 
-commentRouter.delete("/reply/:commentId/:replyId", varifyToken, validateRequest(commentValidations.updateReplyComment), commentUtils.checkAdminOrAuthorForDelete, commentControllers.updateReply);
+commentRouter.patch("/reply/:commentId/:replyId", varifyToken, validateRequest(commentValidations.updateReplyComment), commentUtils.checkAdminOrAuthorForDelete, commentControllers.updateReply);
 
 module.exports = commentRouter;

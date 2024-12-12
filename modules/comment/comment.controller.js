@@ -165,6 +165,7 @@ const updateReply = async (req, res) => {
             data: result,
         });
     } catch (err) {
+        console.log(err);
         return sendResponse(res, 500, {
             success: false,
             message: "Failed to update reply!",

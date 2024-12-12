@@ -45,7 +45,7 @@ const updateReply = async (commentId, replyId, newText) => {
             selectedReply = reply;
         }
     });
-    await Comment.save();
+    await comment.save();
     return selectedReply;
 }
 
