@@ -339,6 +339,26 @@ Request Body:
  }
  ```
  
+   ## 12. Update Reply
+  **Url**: `Base Url/comments/reply/:commentId/:replyId`
+  **Method**: `POST`
+  Only reply creators can update the reply. You have to provide the updated text in the request body.
+  **Request body**
+  ```json
+ {
+     "text": "updated reply",
+ }
+ ```
+
+ **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "reply deleted successfully!",
+     "data": {} // all the comments
+ }
+ ```
+
    # Admin Panel
    **Functionalities**: Admins can create and publish blogs without approval. They can also add or remove other admins from the admin panel. After the first deployment, a default admin (set in the **.env** file) will be available. 
    
