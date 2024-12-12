@@ -11,5 +11,6 @@ adminRouter.get("/", varifyAdmin, adminControllers.getAllAdmin);
 
 // blog features
 adminRouter.post("/approve/:id", varifyAdmin, adminControllers.approveBlog);
+adminRouter.post("/disapprove/:id", varifyAdmin, adminControllers.disapproveBlog);
 
 module.exports = adminRouter;
