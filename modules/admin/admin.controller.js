@@ -69,9 +69,9 @@ const getAllAdmin = async (req, res) => {
 }
 
 const approveBlog = async (req, res) => {
-    const { blogId } = req.body;
+    const { id } = req.params;
     try {
-        const result = await blogServices.updateBlog(blogId,
+        const result = await blogServices.updateBlog(id,
             { isApproved: true });
         if (!result) {
             return sendResponse(res, 500, {

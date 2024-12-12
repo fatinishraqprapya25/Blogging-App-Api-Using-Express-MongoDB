@@ -10,6 +10,6 @@ adminRouter.delete("/:id", varifyAdmin, adminControllers.removeAdmin);
 adminRouter.get("/", varifyAdmin, adminControllers.getAllAdmin);
 
 // blog features
-adminRouter.post("/", varifyAdmin, validateRequest(adminBlogApproveValidationSchema), adminControllers.approveBlog);
+adminRouter.post("/approve/:id", varifyAdmin, adminControllers.approveBlog);
 
 module.exports = adminRouter;
