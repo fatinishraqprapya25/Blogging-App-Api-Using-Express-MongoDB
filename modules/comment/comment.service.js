@@ -35,13 +35,28 @@ const deleteReply = async (commentId, replyId) => {
     return deletedComment;
 }
 
+const updateReply = async (commentId, replyId, newText) => {
+    const comment = await Comment.findById(commentId);
+    if (!comment) throw new Error("Comment not found!");
+    let selectedReply;
+    comment.replies.map(reply => {
+        if (reply._id.equals(replyId)) {
+            reply.text = newText;
+            selectedReply = reply;
+        }
+    });
+    await Comment.save();
+    return selectedReply;
+}
+
 const commentServices = {
     createComment,
     readComments,
     updateComment,
     deleteComment,
     createReply,
-    deleteReply
+    deleteReply,
+    updateReply
 };
 
 module.exports = commentServices;

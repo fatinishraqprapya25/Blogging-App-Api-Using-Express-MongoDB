@@ -147,6 +147,32 @@ const deleteReply = async (req, res) => {
     }
 };
 
+const updateReply = async (req, res) => {
+    try {
+        const { commentId, replyId } = req.params;
+        const { text } = req.body;
+        const result = await commentServices.updateReply(commentId, replyId, text);
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "server error in updating reply",
+            });
+        }
+
+        return sendResponse(res, 200, {
+            success: true,
+            message: "Reply updated successfully",
+            data: result,
+        });
+    } catch (err) {
+        return sendResponse(res, 500, {
+            success: false,
+            message: "Failed to update reply!",
+            error: err,
+        });
+    }
+}
+
 
 const commentControllers = {
     createComment,
@@ -154,7 +180,8 @@ const commentControllers = {
     updateComment,
     deleteComment,
     createReply,
-    deleteReply
+    deleteReply,
+    updateReply
 };
 
 module.exports = commentControllers;
