@@ -421,7 +421,7 @@ Request Body:
 ```json
  {
      "success": true,
-     "message": "blog approved successfully",
+     "message": "blog disapproved successfully",
      "data": {} 
  }
  ```
