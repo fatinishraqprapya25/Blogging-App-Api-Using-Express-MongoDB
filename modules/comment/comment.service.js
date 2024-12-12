@@ -30,7 +30,7 @@ const createReply = async (commentId, replyDetails) => {
 const deleteReply = async (commentId, replyId) => {
     const comment = await Comment.findById(commentId);
     if (!comment) throw new Error("Comment not found");
-    comment.replies = comment.replies.filter(reply => reply._id.equals(replyId));
+    comment.replies = comment.replies.filter(reply => !reply._id.equals(replyId));
     const deletedComment = await comment.save();
     return deletedComment;
 }
