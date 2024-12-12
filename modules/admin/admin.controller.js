@@ -1,4 +1,5 @@
 const adminServices = require("./admin.services");
+const blogServices = require("../blogs/blogs.service");
 const sendResponse = require("../../utils/sendResponse");
 const Admin = require("./admin.model");
 
@@ -60,12 +61,38 @@ const getAllAdmin = async (req, res) => {
         });
     } catch (err) {
         sendResponse(res, 500, {
-            success: true,
+            success: false,
             message: "failed in retrieving admins!",
             error: err
         });
     }
 }
 
-const adminControllers = { createAdmin, removeAdmin, getAllAdmin };
+const approveBlog = async (req, res) => {
+    const { blogId } = req.body;
+    try {
+        const result = await blogServices.updateBlog(blogId,
+            { isApproved: true });
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "failed to approve blog!",
+                error: err
+            });
+        }
+        sendResponse(res, 200, {
+            success: true,
+            message: "blog approved successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "Server Error Occured to approve blog",
+            error: err
+        });
+    }
+}
+
+const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog };
 module.exports = adminControllers;
