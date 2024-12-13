@@ -2,6 +2,7 @@ const blogsService = require("./blogs.service");
 const sendResponse = require("../../utils/sendResponse");
 const path = require("path");
 const Admin = require("../admin/admin.model");
+const countTimeToReadBlog = require("../../utils/countTimeToReadBlog");
 
 const createBlog = async (req, res) => {
     const blogDetails = req.body;
@@ -52,13 +53,14 @@ const getSingleBlog = async (req, res) => {
                     message: "blog not found!",
                 });
             } else {
+                // calculate time to read a blog
+                const timeNeeds = countTimeToReadBlog(result.description);
                 sendResponse(res, 200, {
                     success: true,
                     message: "blog fetched successfully",
-                    data: result
+                    data: { timeNeedsToRead: timeNeeds, blog: result }
                 });
             }
-            
         } else {
             sendResponse(res, 500, {
                 success: false,

@@ -41,7 +41,7 @@ const getAllBlogs = async (searchQuery = "", page = 1, limit = 10, sortOrder = "
 };
 
 const getSingleBlog = async (blogId) => {
-    const result = await Blog.findOne({ _id: blogId, isApproved: true }).populate("writer");
+    let result = await Blog.findOne({ _id: blogId }).populate("writer");
     return result;
 }
 
