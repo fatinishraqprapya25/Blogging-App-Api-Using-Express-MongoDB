@@ -144,5 +144,31 @@ const likeBlog = async (req, res) => {
     }
 }
 
-const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch, deleteBlog, likeBlog };
+const getAllLikes = async (req, res) => {
+    try {
+        const { blogId } = req.params;
+        const result = await blogsService.getAllLikes(blogId);
+        if (result) {
+            sendResponse(res, 200, {
+                success: true,
+                message: "all likes fetched successfully!",
+                data: result
+            });
+        } else {
+            sendResponse(res, 500, {
+                success: false,
+                message: "failed error in fetching likes!",
+            });
+        }
+
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "error occured on fetching likes!",
+            error: err
+        });
+    }
+}
+
+const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch, deleteBlog, likeBlog, getAllLikes };
 module.exports = blogControllers;
