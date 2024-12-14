@@ -9,8 +9,8 @@ const app = express();
 
 app.use(helmet());
 app.use(express.json());
-app.use("/api/v1", router);
 app.use(trackTraffic);
+app.use("/api/v1", router);
 app.use(globalErrorHandler);
 app.use(notFoundHandler);
 

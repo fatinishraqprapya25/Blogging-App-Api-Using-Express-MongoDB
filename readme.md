@@ -241,7 +241,36 @@ Request Body:
      }
  }
  ```
-  ## 7. Create Comment on Blog
+
+ ## 7. Like on Blog
+  **Url**: `Base Url/blogs/like/:blogId`
+  **Method**: `POST`
+  First, you have to provide authorization token in the request header. if you are authorized the like will be done. After Liking in the post, if you again hit in the same url, it will remove you like.
+  **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "action successful!",
+     "data": {
+     }
+ }
+ ```
+
+ ## 8. Get all likes
+  **Url**: `Base Url/blogs/like/:blogId`
+  **Method**: `GET`
+  After hitting in the url with GET method, you will get who has already liked in the blog.
+  **Response: (success)**
+  ```json
+ {
+     "success": true,
+     "message": "likes fetched successfully!",
+     "data": {
+     }
+ }
+ ```
+
+  ## 9. Create Comment on Blog
   **Url**: `Base Url/comments`
   **Method**: `POST`
  Provide authorization token in the request header & send request simliar to the example given below.
@@ -261,7 +290,7 @@ Request Body:
  }
  ```
  
-## 8. Read Comments
+## 10. Read Comments
   **Url**: `Base Url/comments/:postId`
   **Method**: `GET`
  Provide authorization token in the request header & **blogId** as post id in the request params.
@@ -274,7 +303,7 @@ Request Body:
  }
  ```
  
- ## 9. Update Comment
+ ## 11. Update Comment
   **Url**: `Base Url/comments/:commentId`
   **Method**: `PATCH`
   Only the comment creator can update the comment. Pass the token as authorization in the request header.
@@ -293,7 +322,7 @@ Request Body:
      "data": {} //updated comment
  }
  ```
-  ## 10. Delete Comment
+  ## 12. Delete Comment
   **Url**: `Base Url/comments/:commentId`
   **Method**: `DELETE`
   Only admin & comment creator can delete comments.
@@ -307,7 +336,7 @@ Request Body:
  }
  ```
  
-   ## 11. Create Reply Comment
+   ## 13. Create Reply Comment
   **Url**: `Base Url/comments/reply/:commentId`
   **Method**: `POST`
   Any logged in user can reply comments.
@@ -326,7 +355,7 @@ Request Body:
  }
  ```
  
-   ## 11. Delete Reply
+   ## 14. Delete Reply
   **Url**: `Base Url/comments/reply/:commentId/:replyId`
   **Method**: `POST`
   Only admin & reply creator can delete replies.
@@ -339,7 +368,7 @@ Request Body:
  }
  ```
  
-   ## 12. Update Reply
+   ## 15. Update Reply
   **Url**: `Base Url/comments/reply/:commentId/:replyId`
   **Method**: `POST`
   Only reply creators can update the reply. You have to provide the updated text in the request body.
