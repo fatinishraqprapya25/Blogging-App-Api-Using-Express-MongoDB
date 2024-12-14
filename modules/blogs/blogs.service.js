@@ -68,5 +68,10 @@ const likeBlog = async (blogId, userId) => {
     return blog;
 }
 
-const blogsService = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs, likeBlog };
+const getAllLikes = async (blogId) => {
+    const blog = await Blog.findById(blogId);
+    return blog.likes;
+}
+
+const blogsService = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs, likeBlog, getAllLikes };
 module.exports = blogsService;
