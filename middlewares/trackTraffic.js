@@ -1,3 +1,5 @@
+const saveTrafficData = require("../utils/saveTrafficData");
+
 const trackTraffic = (req, res, next) => {
     const userId = req.user ? req.user : null;
     const userType = req.user ? "authenticated" : "general";
@@ -16,3 +18,5 @@ const trackTraffic = (req, res, next) => {
     next();
 
 }
+
+module.exports = trackTraffic;
