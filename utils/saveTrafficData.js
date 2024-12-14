@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const trafficSchema = new mongoose.Schema({
-    userIp: { type: String, required: true },
+    userId: { type: String, required: true },
+    userType: { type: String, required: true },
     activities: [
         {
             route: { type: String, required: true },
@@ -16,13 +17,14 @@ const trafficSchema = new mongoose.Schema({
 const Traffic = mongoose.model("Traffic", trafficSchema);
 
 const saveTrafficData = async (trafficData) => {
-    const { userIp, route, method } = trafficData;
+    const { userId, route, method, userType } = trafficData;
     const currentDate = new Date().toISOString().split("T")[0];
     try {
-        let traffic = await Traffic.findOne({ userIp, date: currentDate });
+        let traffic = await Traffic.findOne({ userId, date: currentDate });
         if (!traffic) {
             traffic = new Traffic({
-                userIp,
+                userId,
+                userType,
                 activities: [{ route, method, timestamp: Date.now() }],
                 date: currentDate
             });

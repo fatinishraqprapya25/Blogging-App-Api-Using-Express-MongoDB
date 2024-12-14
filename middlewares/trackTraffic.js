@@ -1,11 +1,14 @@
 const saveTrafficData = require("../utils/saveTrafficData");
-const varifyToken = require("./varifyToken");
+const checkLoggedIn = require("../utils/checkLoggedIn");
 
-const trackTraffic = (req, res, next) => {
-    const userIp = req.ip;
+const trackTraffic = async (req, res, next) => {
+    const isLoggedIn = await checkLoggedIn(req);
+    const userId = isLoggedIn ? isLoggedIn.id : req.ip;
+    const userType = isLoggedIn ? "authenticated" : "general";
 
     const trafficData = {
-        userIp: userIp,
+        userId,
+        userType,
         route: req.originalUrl,
         method: req.method,
     };
