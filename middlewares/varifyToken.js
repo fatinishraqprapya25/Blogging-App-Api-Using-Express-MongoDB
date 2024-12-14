@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const config = require("../config");
+const checkLoggedIn = require("../utils/checkLoggedIn");
+const sendResponse = require("../utils/sendResponse");
 
 const varifyToken = (req, res, next) => {
     const token = req.headers["authorization"];
@@ -7,15 +7,15 @@ const varifyToken = (req, res, next) => {
         message: "access denied! no token provided!"
     });
 
-    try {
-        const decoded = jwt.verify(token.split(" ")[1], config.jwtSecret);
+    const decoded = checkLoggedIn(req);
+    if (decoded) {
         req.user = decoded;
         next();
-    } catch (err) {
-        res.status(401).json({
-            message: "invalid token",
-            error: err
-        })
+    } else {
+        sendResponse(res, 401, {
+            success: false,
+            message: "invalid token!"
+        });
     }
 }
 

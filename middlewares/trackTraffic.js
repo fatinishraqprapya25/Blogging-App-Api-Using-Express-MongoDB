@@ -1,4 +1,5 @@
 const saveTrafficData = require("../utils/saveTrafficData");
+const varifyToken = require("./varifyToken");
 
 const trackTraffic = (req, res, next) => {
     const userIp = req.ip;
