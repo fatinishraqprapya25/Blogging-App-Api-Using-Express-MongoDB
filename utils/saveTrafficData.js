@@ -1,19 +1,37 @@
 const mongoose = require("mongoose");
 
 const trafficSchema = new mongoose.Schema({
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: null },
-    userType: { type: String, enum: ["authenticated", "general"], required: true },
-    route: { type: String, required: true },
-    method: { type: String, required: true },
-    timestamp: { type: Date, default: Date.now },
+    userIp: { type: String, required: true },
+    activities: [
+        {
+            route: { type: String, required: true },
+            method: { type: String, required: true },
+            timestamp: { type: Date, default: Date.now },
+        }
+    ],
+    date: { type: String, required: true }
+
 });
 
 const Traffic = mongoose.model("Traffic", trafficSchema);
 
 const saveTrafficData = async (trafficData) => {
+    const { userIp, route, method } = trafficData;
+    const currentDate = new Date().toISOString().split("T")[0];
     try {
-        const traffic = new Traffic(trafficData);
+        let traffic = await Traffic.findOne({ userIp, date: currentDate });
+        if (!traffic) {
+            traffic = new Traffic({
+                userIp,
+                activities: [{ route, method, timestamp: Date.now() }],
+                date: currentDate
+            });
+        } else {
+            traffic.activities.push({ route, method, timestamp: Date.now() });
+        }
+
         await traffic.save();
+
     } catch (err) {
         console.log("Error Occured Saving Traffic Data. ", err.message);
     }
