@@ -13,4 +13,7 @@ blogRouter.get("/", blogControllers.getAllBlogOrSearch);
 
 blogRouter.delete("/:id", varifyToken, blogUtils.checkAuthor, blogControllers.deleteBlog);
 
+blogRouter.post("/like/:blogId", varifyToken, blogControllers.likeBlog);
+blogRouter.get("/like/:blogId", varifyToken, blogControllers.getAllLikes);
+
 module.exports = blogRouter;
