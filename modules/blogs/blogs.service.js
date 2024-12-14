@@ -55,5 +55,18 @@ const updateBlog = async (blogId, update) => {
     return result;
 }
 
-const blogsService = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs };
+const likeBlog = async (blogId, userId) => {
+    const blog = await Blog.findById(blogId);
+    if (!blog) throw new Error("Blog not found!");
+    const likedIndex = blog.likes.indexOf(userId);
+    if (likedIndex === -1) {
+        blog.likes.push(userId);
+    } else {
+        blog.likes.splice(likedIndex, 1);
+    }
+    await blog.save();
+    return blog;
+}
+
+const blogsService = { createBlog, getSingleBlog, deleteBlog, updateBlog, getAllBlogs, likeBlog };
 module.exports = blogsService;
