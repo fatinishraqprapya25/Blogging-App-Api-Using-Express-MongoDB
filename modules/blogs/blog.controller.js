@@ -117,5 +117,32 @@ const deleteBlog = async (req, res) => {
     }
 }
 
-const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch, deleteBlog };
+const likeBlog = async (req, res) => {
+    try {
+        const { blogId } = req.params;
+        const userId = req.user.id;
+        const result = await blogsService.likeBlog(blogId, userId);
+        if (result) {
+            sendResponse(res, 200, {
+                success: true,
+                message: "action successfull!",
+                data: result
+            });
+        } else {
+            sendResponse(res, 500, {
+                success: false,
+                message: "action failed!",
+            });
+        }
+
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "action failed!",
+            error: err
+        });
+    }
+}
+
+const blogControllers = { createBlog, getSingleBlog, getAllBlogOrSearch, deleteBlog, likeBlog };
 module.exports = blogControllers;
