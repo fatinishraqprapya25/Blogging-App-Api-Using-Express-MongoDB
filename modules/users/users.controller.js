@@ -1,4 +1,5 @@
 const path = require("path");
+const jwt = require("jsonwebtoken");
 const config = require("../../config")
 const User = require("./users.model");
 const userServices = require("./users.service");
@@ -7,6 +8,7 @@ const sendResponse = require("../../utils/sendResponse");
 const hashPassword = require("../../utils/hashPassword");
 const deleteUploadedFile = require("../../errors/deleteUploadedFile");
 const sendEmail = require("../../utils/sendEmail");
+const generateRandomCode = require("../../utils/generateRandomCode");
 
 const createUser = async (req, res) => {
     try {
@@ -32,11 +34,36 @@ const createUser = async (req, res) => {
 
         userData.password = await hashPassword(userData.password, Number(config.bcryptCircleCount));
 
-        // const sendVerificationCode = sendEmail({
-        //     from: config.email,
-        //     to: userData.email,
-
-        // });
+        const code = generateRandomCode(6);
+        const sentVerificationCode = await sendEmail({
+            from: config.email,
+            to: userData.email,
+            subject: "Your Verification Code",
+            html: `<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Verification Code</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+                <div style="max-width: 500px; margin: 20px auto; background: #ffffff; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    <h2 style="color: #333;">Your Verification Code</h2>
+                    <p style="color: #555; font-size: 16px;">Use the following code to complete your verification process. This code is valid for a limited time.</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #007BFF; background: #e8f0fe; padding: 10px; border-radius: 5px; display: inline-block; margin: 10px 0;">
+                        ${code}
+                    </div>
+                    <p style="color: #555; font-size: 14px;">If you did not request this, please ignore this email.</p>
+                    <p style="margin-top: 20px; font-size: 12px; color: #999;">&copy; 2025 Your Company. All rights reserved.</p>
+                </div>
+            </body>
+            </html>`
+        });
+        console.log(sentVerificationCode);
+        if (sentVerificationCode) {
+            const verificationToken = jwt.sign({ verificationCode: code }, config.jwtSecret, { expiresIn: "2m" });
+            userData.verificationToken = verificationToken;
+        }
 
         const result = await userServices.createUserIntoDb(userData);
         res.status(200).json({

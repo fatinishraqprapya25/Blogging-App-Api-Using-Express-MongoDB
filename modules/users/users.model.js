@@ -24,6 +24,9 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    verificationToken: {
+        type: String,
+    }
 });
 
 // Checking email to handle duplicate emails
