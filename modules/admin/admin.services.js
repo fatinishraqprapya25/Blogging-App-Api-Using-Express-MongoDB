@@ -1,3 +1,4 @@
+const { Traffic } = require("../../utils/saveTrafficData");
 const Admin = require("./admin.model")
 
 const createAdmin = async (userDetails) => {
@@ -18,5 +19,14 @@ const getAllAdmin = async () => {
     return result;
 }
 
-const adminServices = { createAdmin, removeAdmin, getAllAdmin };
+const getTodaysTraffic = async () => {
+    const todaysDate = new Date().toISOString();
+    const generalTraffic = await Traffic.countDocuments({ date: todaysDate, userType: "general" });
+    const authenticatedTraffic = await Traffic.countDocuments({ date: todaysDate, userType: "authenticated" });
+    const total = generalTraffic + authenticatedTraffic;
+    return { generalTraffic, authenticatedTraffic, total };
+}
+
+
+const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic };
 module.exports = adminServices;

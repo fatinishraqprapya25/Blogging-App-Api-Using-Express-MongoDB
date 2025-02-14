@@ -39,4 +39,4 @@ const saveTrafficData = async (trafficData) => {
     }
 }
 
-module.exports = saveTrafficData;
+module.exports = { saveTrafficData, Traffic };

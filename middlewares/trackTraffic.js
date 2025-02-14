@@ -1,4 +1,4 @@
-const saveTrafficData = require("../utils/saveTrafficData");
+const { saveTrafficData } = require("../utils/saveTrafficData");
 const checkLoggedIn = require("../utils/checkLoggedIn");
 
 const trackTraffic = async (req, res, next) => {
