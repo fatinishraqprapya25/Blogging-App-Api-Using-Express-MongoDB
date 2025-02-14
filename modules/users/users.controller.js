@@ -185,7 +185,7 @@ const resetPassword = async (req, res) => {
         const { code, email, password } = req.body;
         const checkUser = await userUtils.verifyCode(email, code);
         if (checkUser) {
-            const hashedPassword = await hashPassword(password, config.bcryptCircleCount);
+            const hashedPassword = await hashPassword(password, parseInt(config.bcryptCircleCount));
             checkUser.password = hashedPassword;
             const result = await checkUser.save();
             if (!result) throw new Error("Password couldn't be resetted");
