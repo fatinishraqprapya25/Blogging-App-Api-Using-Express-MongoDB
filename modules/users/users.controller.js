@@ -97,6 +97,12 @@ const verifyUser = async (req, res) => {
     try {
         const { email, code } = req.body;
         const user = await User.findOne({ email });
+        if (!user) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "User not found!"
+            })
+        }
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
         if (parseInt(decoded.verificationCode) === parseInt(code)) {
             user.isVerified = true;
@@ -122,6 +128,63 @@ const verifyUser = async (req, res) => {
     }
 
 };
+
+const resendVerificationCode = async (req, res, user) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email, isVerified: false });
+        if (!user) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "User not found!"
+            });
+        }
+        const code = generateRandomCode(6);
+        const sentVerificationCode = await sendEmail({
+            from: config.email,
+            to: email,
+            subject: "Your Verification Code",
+            html: `<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Verification Code</title>
+            </head>
+            <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+                <div style="max-width: 500px; margin: 20px auto; background: #ffffff; padding: 20px; text-align: center; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                    <h2 style="color: #333;">Your Verification Code</h2>
+                    <p style="color: #555; font-size: 16px;">Use the following code to complete your verification process. This code is valid for a limited time.</p>
+                    <div style="font-size: 24px; font-weight: bold; color: #007BFF; background: #e8f0fe; padding: 10px; border-radius: 5px; display: inline-block; margin: 10px 0;">
+                        ${code}
+                    </div>
+                    <p style="color: #555; font-size: 14px;">If you did not request this, please ignore this email.</p>
+                    <p style="margin-top: 20px; font-size: 12px; color: #999;">&copy; 2025 Your Company. All rights reserved.</p>
+                </div>
+            </body>
+            </html>`
+        });
+        if (sentVerificationCode) {
+            const token = jwt.sign({ code }, config.jwtSecret, { expiresIn: "2m" });
+            user.verificationToken = token;
+            await user.save();
+            return sendResponse(res, 200, {
+                success: true,
+                message: "A Verification Code sent to your email, please verify it..."
+            });
+        }
+        sendResponse(res, 500, {
+            success: false,
+            message: "error occured sending verification code!"
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: err.message,
+            error: err
+        });
+    }
+}
 
 const loginUser = async (req, res) => {
     const userData = req.body;
@@ -206,5 +269,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser };
+const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser, resendVerificationCode };
 module.exports = userControllers;
