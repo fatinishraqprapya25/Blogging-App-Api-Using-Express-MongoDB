@@ -93,6 +93,33 @@ const createUser = async (req, res) => {
     }
 };
 
+const verifyUser = async (req, res) => {
+    try {
+        const { email, code } = req.body;
+        const user = await User.findOne({ email });
+        const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
+        if (decoded.code === code) {
+            user.isVerified = true;
+            user.verificationToken = "000000";
+            const result = await user.save();
+            sendResponse(res, 200, {
+                success: true,
+                message: "user verified successfully!",
+                data: result
+            });
+        } else {
+            sendResponse(res, 500, {
+                success: false,
+                message: "your provided code is invalid!",
+                data: result
+            });
+        }
+    } catch (err) {
+        throw new Error("Invalid Code");
+    }
+
+};
+
 const loginUser = async (req, res) => {
     const userData = req.body;
 
@@ -176,5 +203,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser };
+const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser };
 module.exports = userControllers;
