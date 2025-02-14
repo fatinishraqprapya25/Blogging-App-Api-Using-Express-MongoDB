@@ -94,7 +94,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const verifyUser = async (req, res, next) => {
+const verifyUser = async (req, res) => {
     try {
         const { email, code } = req.body;
         const checkUser = await userUtils.verifyCode(email, code);
@@ -170,6 +170,34 @@ const resendVerificationCode = async (req, res, user) => {
         sendResponse(res, 500, {
             success: false,
             message: "error occured sending verification code!"
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: err.message,
+            error: err
+        });
+    }
+}
+
+const resetPassword = async (req, res) => {
+    try {
+        const { code, email, password } = req.body;
+        const checkUser = await userUtils.verifyCode(email, code);
+        if (checkUser) {
+            const hashedPassword = await hashPassword(password, config.bcryptCircleCount);
+            checkUser.password = hashedPassword;
+            const result = await checkUser.save();
+            if (!result) throw new Error("Password couldn't be resetted");
+            return sendResponse(res, 200, {
+                success: true,
+                message: "Password reset done! please login."
+            });
+        }
+
+        sendResponse(res, 500, {
+            success: false,
+            message: "error occured reseting password!"
         });
     } catch (err) {
         sendResponse(res, 500, {
@@ -263,5 +291,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser, resendVerificationCode };
+const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser, resendVerificationCode, resetPassword };
 module.exports = userControllers;

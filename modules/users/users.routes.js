@@ -18,6 +18,7 @@ authRouter.post("/register", upload("profile", 15).single("profilePic"), validat
 
 authRouter.post("/verify", userControllers.verifyUser);
 authRouter.post("/sendVc", userControllers.resendVerificationCode);
+authRouter.post("/resetPass", userControllers.resetPassword);
 
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 
