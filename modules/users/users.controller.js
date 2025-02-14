@@ -104,7 +104,6 @@ const verifyUser = async (req, res) => {
             })
         }
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
-        console.log(decoded.verificationCode, code)
         if (parseInt(decoded.verificationCode) === parseInt(code)) {
             user.isVerified = true;
             user.verificationToken = "000000";
