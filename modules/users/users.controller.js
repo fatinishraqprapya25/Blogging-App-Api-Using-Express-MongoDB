@@ -5,7 +5,8 @@ const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
 const sendResponse = require("../../utils/sendResponse");
 const hashPassword = require("../../utils/hashPassword");
-const deleteUploadedFile = require("../../errors/deleteUploadedFile")
+const deleteUploadedFile = require("../../errors/deleteUploadedFile");
+const sendEmail = require("../../utils/sendEmail");
 
 const createUser = async (req, res) => {
     try {
@@ -30,6 +31,12 @@ const createUser = async (req, res) => {
         }
 
         userData.password = await hashPassword(userData.password, Number(config.bcryptCircleCount));
+
+        // const sendVerificationCode = sendEmail({
+        //     from: config.email,
+        //     to: userData.email,
+
+        // });
 
         const result = await userServices.createUserIntoDb(userData);
         res.status(200).json({
