@@ -8,5 +8,6 @@ module.exports = {
     databaseUrl: process.env.DATABASE_URL,
     bcryptCircleCount: process.env.BCRYPT_CIRCLE_COUNT,
     jwtSecret: process.env.JWT_SECRET,
-    defaultAdminEmail: process.env.DEFAULT_ADMIN
+    email: process.env.EMAIL,
+    appPass: process.env.APP_PASS
 }
