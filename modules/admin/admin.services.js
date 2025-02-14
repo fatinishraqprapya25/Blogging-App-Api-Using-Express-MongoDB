@@ -62,6 +62,8 @@ const getThisYearsTraffic = async () => {
         date: { $gte: startOfYear, $lte: endOfYear },
         userType: "authenticated"
     });
+    const total = generalTraffic + authenticatedTraffic;
+    return { generalTraffic, authenticatedTraffic, total };
 }
 
 const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic, getThisMonthsTraffic, getThisYearsTraffic };
