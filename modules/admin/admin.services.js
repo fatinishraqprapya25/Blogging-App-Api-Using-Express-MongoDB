@@ -46,5 +46,23 @@ const getThisMonthsTraffic = async () => {
     return { generalTraffic, authenticatedTraffic, total };
 }
 
-const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic, getThisMonthsTraffic };
+const getThisYearsTraffic = async () => {
+    const startOfYear = new Date();
+    startOfYear.setMonth(0);
+    startOfYear.setDate(1);
+    startOfYear.setHours(0, 0, 0, 0);
+    const endOfYear = new Date(startOfYear);
+    endOfYear.setFullYear(startOfYear.getFullYear() + 1);
+
+    const generalTraffic = await Traffic.countDocuments({
+        date: { $gte: startOfYear, $lte: endOfYear },
+        userType: "general"
+    });
+    const authenticatedTraffic = await Traffic.countDocuments({
+        date: { $gte: startOfYear, $lte: endOfYear },
+        userType: "authenticated"
+    });
+}
+
+const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic, getThisMonthsTraffic, getThisYearsTraffic };
 module.exports = adminServices;
