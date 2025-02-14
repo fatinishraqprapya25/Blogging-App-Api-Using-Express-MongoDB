@@ -27,6 +27,24 @@ const getTodaysTraffic = async () => {
     return { generalTraffic, authenticatedTraffic, total };
 }
 
+const getThisMonthsTraffic = async () => {
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+    const endOfMonth = new Date(startOfMonth);
+    endOfMonth.setMonth(startOfMonth.getMonth() + 1);
 
-const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic };
+    const generalTraffic = await Traffic.countDocuments({
+        date: { $gte: startOfMonth.toISOString(), $lt: endOfMonth.toISOString() },
+        userType: "general"
+    });
+    const authenticatedTraffic = await Traffic.countDocuments({
+        date: { $gte: startOfMonth.toISOString(), $lt: endOfMonth.toISOString() },
+        userType: "authenticated"
+    })
+    const total = generalTraffic + authenticatedTraffic;
+    return { generalTraffic, authenticatedTraffic, total };
+}
+
+const adminServices = { createAdmin, removeAdmin, getAllAdmin, getTodaysTraffic, getThisMonthsTraffic };
 module.exports = adminServices;
