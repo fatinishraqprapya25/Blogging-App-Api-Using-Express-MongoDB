@@ -9,6 +9,7 @@ const hashPassword = require("../../utils/hashPassword");
 const deleteUploadedFile = require("../../errors/deleteUploadedFile");
 const sendEmail = require("../../utils/sendEmail");
 const generateRandomCode = require("../../utils/generateRandomCode");
+const userUtils = require("./users.utils");
 
 const createUser = async (req, res) => {
     try {
@@ -96,15 +97,8 @@ const createUser = async (req, res) => {
 const verifyUser = async (req, res) => {
     try {
         const { email, code } = req.body;
-        const user = await User.findOne({ email });
-        if (!user) {
-            return sendResponse(res, 500, {
-                success: false,
-                message: "User not found!"
-            })
-        }
-        const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
-        if (parseInt(decoded.verificationCode) === parseInt(code)) {
+        const check = userUtils.verifyCode(email, code);
+        if (check) {
             user.isVerified = true;
             user.verificationToken = "000000";
             const result = await user.save();
