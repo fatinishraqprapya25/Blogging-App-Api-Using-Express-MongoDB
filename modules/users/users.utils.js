@@ -22,12 +22,11 @@ userUtils.verifyCode = async (email, code) => {
         if (!user) throw new Error("user not found!");
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
         if (!decoded) throw new Error("invalid token");
-        if (parseInt(decode.verificationCode) === parseInt(code)) return user;
+        if (parseInt(decoded.verificationCode) === parseInt(code)) return user;
         return false;
     } catch (err) {
         if (err.name === "TokenExpiredError") {
-            console.log("hi");
-            new Error("JWT has expired");
+            throw new Error("JWT has expired");
         }
         throw new Error(err.message);
     }
