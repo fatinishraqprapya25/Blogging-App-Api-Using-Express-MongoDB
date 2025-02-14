@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    profilePicture: String
+    profilePicture: String,
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
 });
 
 // Checking email to handle duplicate emails
