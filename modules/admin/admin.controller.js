@@ -120,5 +120,28 @@ const disapproveBlog = async (req, res) => {
     }
 }
 
-const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog, disapproveBlog };
+const getTodaysTraffic = async (req, res) => {
+    try {
+        const result = await adminServices.getTodaysTraffic();
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "failed to retrieve todays traffic!"
+            });
+        }
+        sendResponse(res, 200, {
+            success: true,
+            message: "todays traffic retrieved successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: err.message,
+            error: err
+        })
+    }
+}
+
+const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog, disapproveBlog, getTodaysTraffic };
 module.exports = adminControllers;
