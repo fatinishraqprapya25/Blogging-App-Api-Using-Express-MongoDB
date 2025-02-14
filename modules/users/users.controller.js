@@ -1,6 +1,6 @@
 const path = require("path");
 const config = require("../../config")
-const User = require("./users.schema");
+const User = require("./users.model");
 const userServices = require("./users.service");
 const generateToken = require("../../utils/jwt");
 const sendResponse = require("../../utils/sendResponse");
