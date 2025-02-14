@@ -2,7 +2,6 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const deleteUploadedFile = require("../../errors/deleteUploadedFile");
 const User = require("./users.model");
-const CustomError = require("../../errors/CustomError");
 const config = require("../../config");
 
 const userUtils = {};
@@ -20,13 +19,17 @@ userUtils.deteteUploadedPhotoIfValidationFailed = function (msg) {
 userUtils.verifyCode = async (email, code) => {
     try {
         const user = await User.findOne({ email });
-        if (!user) throw new CustomError("user not found!");
+        if (!user) throw new Error("user not found!");
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
-        if (!decoded) throw new CustomError("invalid token");
-        if (parseInt(decode.verificationCode) === parseInt(code)) return true;
+        if (!decoded) throw new Error("invalid token");
+        if (parseInt(decode.verificationCode) === parseInt(code)) return user;
         return false;
     } catch (err) {
-        throw new CustomError(err.message);
+        if (err.name === "TokenExpiredError") {
+            console.log("hi");
+            new Error("JWT has expired");
+        }
+        throw new Error(err.message);
     }
 }
 

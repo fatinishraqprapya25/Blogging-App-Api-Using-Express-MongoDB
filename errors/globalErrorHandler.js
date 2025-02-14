@@ -22,11 +22,6 @@ const globalErrorHandler = (error, req, res, next) => {
         errorDetails = { field: error.field, message: error.message };
     }
 
-    else if (error instanceof CustomError) {
-        statusCode = error.statusCode;
-        message = error.message;
-    }
-
     else {
         errorDetails = { message: error.message || "Something went wrong" };
     }

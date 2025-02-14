@@ -94,14 +94,14 @@ const createUser = async (req, res) => {
     }
 };
 
-const verifyUser = async (req, res) => {
+const verifyUser = async (req, res, next) => {
     try {
         const { email, code } = req.body;
-        const check = userUtils.verifyCode(email, code);
-        if (check) {
-            user.isVerified = true;
-            user.verificationToken = "000000";
-            const result = await user.save();
+        const checkUser = await userUtils.verifyCode(email, code);
+        if (checkUser) {
+            checkUser.isVerified = true;
+            checkUser.verificationToken = "000000";
+            const result = await checkUser.save();
             sendResponse(res, 200, {
                 success: true,
                 message: "user verified successfully!",
