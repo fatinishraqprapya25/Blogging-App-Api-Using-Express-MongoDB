@@ -98,7 +98,7 @@ const verifyUser = async (req, res) => {
         const { email, code } = req.body;
         const user = await User.findOne({ email });
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
-        if (decoded.code === code) {
+        if (parseInt(decoded.verificationCode) === parseInt(code)) {
             user.isVerified = true;
             user.verificationToken = "000000";
             const result = await user.save();
@@ -110,12 +110,15 @@ const verifyUser = async (req, res) => {
         } else {
             sendResponse(res, 500, {
                 success: false,
-                message: "your provided code is invalid!",
-                data: result
+                message: "your provided code is invalid!"
             });
         }
     } catch (err) {
-        throw new Error("Invalid Code");
+        sendResponse(res, 500, {
+            success: false,
+            message: err.message,
+            error: err
+        });
     }
 
 };
