@@ -104,6 +104,7 @@ const verifyUser = async (req, res) => {
             })
         }
         const decoded = jwt.verify(user.verificationToken, config.jwtSecret);
+        console.log(decoded.verificationCode, code)
         if (parseInt(decoded.verificationCode) === parseInt(code)) {
             user.isVerified = true;
             user.verificationToken = "000000";
@@ -165,7 +166,7 @@ const resendVerificationCode = async (req, res, user) => {
             </html>`
         });
         if (sentVerificationCode) {
-            const token = jwt.sign({ code }, config.jwtSecret, { expiresIn: "2m" });
+            const token = jwt.sign({ verificationCode: code }, config.jwtSecret, { expiresIn: "2m" });
             user.verificationToken = token;
             await user.save();
             return sendResponse(res, 200, {
