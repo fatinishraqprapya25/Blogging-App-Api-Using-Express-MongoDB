@@ -14,7 +14,7 @@ const userUtils = require("./users.utils");
 const varifyAdmin = require("../../middlewares/varifyAdmin");
 
 // auth routes
-authRouter.post("/register", upload("profile").single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
+authRouter.post("/register", upload("profile", 15).single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 
 // admin approval needed routes
@@ -23,4 +23,4 @@ userRouter.get("/:id", varifyAdmin, userControllers.getSingleUser);
 // user must be logged in route
 userRouter.patch("/", validateRequest(userValidations.updateUserValidationSchema), varifyToken, userControllers.updateUser);
 
-module.exports = {userRouter, authRouter};
+module.exports = { userRouter, authRouter };
