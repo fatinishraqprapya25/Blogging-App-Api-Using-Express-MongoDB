@@ -166,6 +166,29 @@ const getThisMonthsTraffic = async (req, res) => {
     }
 }
 
+const getThisYearsTraffic = async (req, res) => {
+    try {
+        const result = await adminServices.getThisYearsTraffic();
+        if (!result) {
+            return sendResponse(res, 500, {
+                success: false,
+                message: "failed to retrieve this years traffic!"
+            });
+        }
+        sendResponse(res, 200, {
+            success: true,
+            message: "this year's traffic retrieved successfully!",
+            data: result
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: err.message,
+            error: err
+        })
+    }
+}
 
-const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog, disapproveBlog, getTodaysTraffic, getThisMonthsTraffic };
+
+const adminControllers = { createAdmin, removeAdmin, getAllAdmin, approveBlog, disapproveBlog, getTodaysTraffic, getThisMonthsTraffic, getThisYearsTraffic };
 module.exports = adminControllers;
