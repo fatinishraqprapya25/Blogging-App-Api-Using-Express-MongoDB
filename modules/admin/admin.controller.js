@@ -24,7 +24,6 @@ const createAdmin = async (req, res) => {
 
 
     } catch (err) {
-        console.log(err);
         sendResponse(res, 500, {
             success: false,
             message: "failed in adding admin!",

@@ -62,16 +62,14 @@ const createUser = async (req, res) => {
         });
 
         if (sentVerificationCode) {
-            // delete sensative informations from request body
             if (userData.isVerified) delete userData.isVerified;
             if (userData.verificationToken) delete userData.verificationToken;
 
-            // generate verification token
             const verificationToken = jwt.sign({ verificationCode: code }, config.jwtSecret, { expiresIn: "2m" });
             userData.verificationToken = verificationToken;
 
-            // save user data to database
             const result = await userServices.createUserIntoDb(userData);
+            if (result.verificationToken) delete result.verificationToken;
             return sendResponse(res, 200, {
                 success: true,
                 message: "User is Registered successfully!",

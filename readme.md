@@ -4,6 +4,8 @@ A simple and usefull blogging platform that allows users to **create, read, upda
 
 ## 🚀 Features
 - User Authentication (Login/Signup)
+- Code Verification
+- Password Forget & Reset
 - Create, Read, Update, and Delete Blogs
 - Admin Approval System for Blogs
 - Responsive API with error handling
@@ -237,7 +239,7 @@ Request Body:
          "title": "JavaScript Asynchronous Behavior",
          "description": "the description here",
          "isApproved": true,
-         "blogImage": "img" // img path
+         "blogImage": "img"
      }
  }
  ```
