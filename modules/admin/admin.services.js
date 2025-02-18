@@ -35,11 +35,13 @@ const getThisMonthsTraffic = async () => {
     endOfMonth.setMonth(startOfMonth.getMonth() + 1);
 
     const generalTraffic = await Traffic.countDocuments({
-        date: { $gte: startOfMonth.toISOString(), $lt: endOfMonth.toISOString() },
+        date: {
+            $gte: startOfMonth.toISOString().split("T")[0], $lt: endOfMonth.toISOString().split("T")[0]
+        },
         userType: "general"
     });
     const authenticatedTraffic = await Traffic.countDocuments({
-        date: { $gte: startOfMonth.toISOString(), $lt: endOfMonth.toISOString() },
+        date: { $gte: startOfMonth.toISOString().split("T")[0], $lt: endOfMonth.toISOString().split("T")[0] },
         userType: "authenticated"
     })
     const total = generalTraffic + authenticatedTraffic;
@@ -55,11 +57,11 @@ const getThisYearsTraffic = async () => {
     endOfYear.setFullYear(startOfYear.getFullYear() + 1);
 
     const generalTraffic = await Traffic.countDocuments({
-        date: { $gte: startOfYear, $lte: endOfYear },
+        date: { $gte: startOfYear.toISOString().split("T")[0], $lte: endOfYear.toISOString().split("T")[0] },
         userType: "general"
     });
     const authenticatedTraffic = await Traffic.countDocuments({
-        date: { $gte: startOfYear, $lte: endOfYear },
+        date: { $gte: startOfYear.toISOString().split("T")[0], $lte: endOfYear.toISOString().split("T")[0] },
         userType: "authenticated"
     });
     const total = generalTraffic + authenticatedTraffic;
