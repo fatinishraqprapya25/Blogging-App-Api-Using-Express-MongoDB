@@ -539,14 +539,52 @@ Request Body:
   
     
     ## 6. Get Todays Traffic Data
-  **Url**: `Base Url/admin/disapprove/:id`
-  **Method**: `DELETE`
-  Provide the token in the authorization header and pass the blog id in the request params. If the person is an admin, the blog will be disapproved.
+  **Url**: `Base Url/admin/traffic/today`
+  **Method**: `GET`
+  Provide the token in the authorization header and get the traffic details of today.
 **Response: (success)**
 ```json
  {
      "success": true,
-     "message": "blog disapproved successfully",
-     "data": {} 
+     "message": "todays traffic fetched successfully!",
+     "data": {
+        authenticated: 0,
+        general: 1,
+        total: 1
+     } 
+ }
+ ```
+
+    ## 7. Get Todays Traffic Data
+  **Url**: `Base Url/admin/traffic/thismonth`
+  **Method**: `GET`
+  Provide the token in the authorization header and get the traffic details of this month's.
+**Response: (success)**
+```json
+ {
+     "success": true,
+     "message": "todays traffic fetched successfully!",
+     "data": {
+        authenticated: 0,
+        general: 1,
+        total: 1
+     } 
+ }
+ ```
+
+     ## 8. Get this Months Traffic Data
+  **Url**: `Base Url/admin/traffic/thisyear`
+  **Method**: `GET`
+  Provide the token in the authorization header and get the traffic details of this month's.
+**Response: (success)**
+```json
+ {
+     "success": true,
+     "message": "todays traffic fetched successfully!",
+     "data": {
+        authenticated: 0,
+        general: 1,
+        total: 1
+     } 
  }
  ```
