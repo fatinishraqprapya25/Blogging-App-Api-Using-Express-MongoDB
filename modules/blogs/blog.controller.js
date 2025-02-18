@@ -13,18 +13,15 @@ const createBlog = async (req, res) => {
         if (isAdmin) {
             blogDetails.isApproved = true
         }
-
-        const blogImage = req.file.path;
-        let filePath;
-
-        if (blogImage === null) {
+        if (!req.file || !req.file.path) {
             return sendResponse(res, 500, {
                 success: false,
                 message: "blog image must be uploaded!",
             });
         }
+        const blogImage = req.file.path;
 
-        filePath = path.join(__dirname, "../../", blogImage);
+        const filePath = path.join(__dirname, "../../", blogImage);
 
         blogDetails.blogImage = filePath;
         const result = await blogsService.createBlog(blogDetails);
