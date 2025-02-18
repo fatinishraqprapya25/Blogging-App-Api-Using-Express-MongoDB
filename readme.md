@@ -40,7 +40,7 @@ BCRYPT_CIRCLE_COUNT=hashing password circle count in NUMBER
 
 
 # 🚀API Endpoints
-## Base Url: not published yet
+## Base Url: https://blogging-app-api-using-express-mongo-db-iwvr.vercel.app/
 
 ## 1. Register a User
   **Url**: `Base Url/auth/register`
