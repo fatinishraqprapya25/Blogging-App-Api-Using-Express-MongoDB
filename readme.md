@@ -85,7 +85,42 @@ profilePic is optional. If you don't provide it pick a random one.
   }
 ```
 
-## 2. Login User
+## 2. Verify a User
+  **Url**: `Base Url/auth/verify`
+  **Method**: `POST`
+ 
+After registration, a six digit code will be sent to your email address. In the request body, you have to provide the email adress and the code sent to your email.
+
+--Request Body: 
+```json 
+{
+    "email": "john.doe@gmail.com",
+    "code": "886565"
+}
+```
+
+  - **Response: (success)**
+  ```json
+  {
+    "success": true,
+    "message": "User is Verified successfully!",
+    "data": {
+        <!-- user informations -->
+    }
+  }
+```
+
+  - **Response: (failure)**
+  ```json
+  {
+    "success": false,
+    "message": "invalid verification code!",
+    "error": {}
+  }
+```
+
+
+## 3. Login User
   **Url**: `Base Url/auth/login`
   **Method**: `POST`
   
@@ -115,7 +150,7 @@ Request Body:
     "message": "incorrect password",
   }
  ```
- ## 3. Update User Informations
+ ## 4. Update User Informations
   **Url**: `Base Url/user/`
   **Method**: `PATCH`
 
@@ -153,7 +188,7 @@ Request Body:
   }
  ```
  
-  ## 4. Creating Blog From User
+  ## 5. Creating Blog From User
   **Url**: `Base Url/blogs/`
   **Method**: `POST`
   To create a new blog user must be logged in and have to provide token via request header. User must provide blog contents and **Image** as well in the request body.For example, a demo request is given below.
@@ -181,7 +216,7 @@ Request Body:
  }
  ```
  
-   ## 4. Finding Blog With Id
+   ## 6. Finding Blog With Id
   **Url**: `Base Url/blogs/:id`
   **Method**: `GET`
   Pass authorization token in the request header & id in the request parameter to get specific blog.A demo response is given below.
@@ -199,7 +234,7 @@ Request Body:
      }
  }
  ```
-   ## 5. Searching Blogs / Fetching Blogs
+   ## 7. Searching Blogs / Fetching Blogs
   **Url**: `Base Url/blogs/`
   **Method**: `GET`
   First, you have to provide authorization token in the request header. Just after doing that if you hit the api, you will get response. But there are some other query params. there is a specific query params called **query** which handles the search functionality. There is also some **limit**, **page** & **sortBy** property in the request query object. 
@@ -225,7 +260,7 @@ Request Body:
  }
  ```
  
-   ## 6. Deleting Blog
+   ## 8. Deleting Blog
   **Url**: `Base Url/blogs/:id`
   **Method**: `DELETE`
   First, you have to provide authorization token in the request header. Only the post author and the admin can delete the blog.
@@ -244,7 +279,7 @@ Request Body:
  }
  ```
 
- ## 7. Like on Blog
+ ## 9. Like on Blog
   **Url**: `Base Url/blogs/like/:blogId`
   **Method**: `POST`
   First, you have to provide authorization token in the request header. if you are authorized the like will be done. After Liking in the post, if you again hit in the same url, it will remove you like.
@@ -258,7 +293,7 @@ Request Body:
  }
  ```
 
- ## 8. Get all likes
+ ## 10. Get all likes
   **Url**: `Base Url/blogs/like/:blogId`
   **Method**: `GET`
   After hitting in the url with GET method, you will get who has already liked in the blog.
@@ -272,7 +307,7 @@ Request Body:
  }
  ```
 
-  ## 9. Create Comment on Blog
+  ## 11. Create Comment on Blog
   **Url**: `Base Url/comments`
   **Method**: `POST`
  Provide authorization token in the request header & send request simliar to the example given below.
@@ -292,7 +327,7 @@ Request Body:
  }
  ```
  
-## 10. Read Comments
+## 11. Read Comments
   **Url**: `Base Url/comments/:postId`
   **Method**: `GET`
  Provide authorization token in the request header & **blogId** as post id in the request params.
@@ -305,7 +340,7 @@ Request Body:
  }
  ```
  
- ## 11. Update Comment
+ ## 12. Update Comment
   **Url**: `Base Url/comments/:commentId`
   **Method**: `PATCH`
   Only the comment creator can update the comment. Pass the token as authorization in the request header.
@@ -324,7 +359,7 @@ Request Body:
      "data": {} //updated comment
  }
  ```
-  ## 12. Delete Comment
+  ## 13. Delete Comment
   **Url**: `Base Url/comments/:commentId`
   **Method**: `DELETE`
   Only admin & comment creator can delete comments.
@@ -338,7 +373,7 @@ Request Body:
  }
  ```
  
-   ## 13. Create Reply Comment
+   ## 14. Create Reply Comment
   **Url**: `Base Url/comments/reply/:commentId`
   **Method**: `POST`
   Any logged in user can reply comments.
@@ -357,7 +392,7 @@ Request Body:
  }
  ```
  
-   ## 14. Delete Reply
+   ## 15. Delete Reply
   **Url**: `Base Url/comments/reply/:commentId/:replyId`
   **Method**: `POST`
   Only admin & reply creator can delete replies.
@@ -370,7 +405,7 @@ Request Body:
  }
  ```
  
-   ## 15. Update Reply
+   ## 16. Update Reply
   **Url**: `Base Url/comments/reply/:commentId/:replyId`
   **Method**: `POST`
   Only reply creators can update the reply. You have to provide the updated text in the request body.
