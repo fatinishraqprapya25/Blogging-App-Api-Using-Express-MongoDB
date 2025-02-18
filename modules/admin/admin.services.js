@@ -20,7 +20,7 @@ const getAllAdmin = async () => {
 }
 
 const getTodaysTraffic = async () => {
-    const todaysDate = new Date().toISOString();
+    const todaysDate = new Date().toISOString().split("T")[0];
     const generalTraffic = await Traffic.countDocuments({ date: todaysDate, userType: "general" });
     const authenticatedTraffic = await Traffic.countDocuments({ date: todaysDate, userType: "authenticated" });
     const total = generalTraffic + authenticatedTraffic;

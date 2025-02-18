@@ -537,3 +537,16 @@ Request Body:
  }
  ```
   
+    
+    ## 6. Get Todays Traffic Data
+  **Url**: `Base Url/admin/disapprove/:id`
+  **Method**: `DELETE`
+  Provide the token in the authorization header and pass the blog id in the request params. If the person is an admin, the blog will be disapproved.
+**Response: (success)**
+```json
+ {
+     "success": true,
+     "message": "blog disapproved successfully",
+     "data": {} 
+ }
+ ```
