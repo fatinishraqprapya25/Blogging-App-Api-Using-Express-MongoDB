@@ -1,12 +1,14 @@
 const express = require("express");
 const router = require("./routes");
 const helmet = require("helmet");
+const cors = require("cors");
 const trackTraffic = require("./middlewares/trackTraffic");
 const globalErrorHandler = require("./errors/globalErrorHandler");
 const notFoundHandler = require("./errors/notFoundHandler");
 
 const app = express();
 
+app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use(trackTraffic);
