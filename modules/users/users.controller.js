@@ -124,7 +124,7 @@ const verifyUser = async (req, res) => {
 const resendVerificationCode = async (req, res, user) => {
     try {
         const { email } = req.body;
-        const user = await User.findOne({ email, isVerified: false });
+        const user = await User.findOne({ email });
         if (!user) {
             return sendResponse(res, 500, {
                 success: false,
