@@ -122,7 +122,7 @@ const likeBlog = async (req, res) => {
         if (result) {
             sendResponse(res, 200, {
                 success: true,
-                message: "action successfull!",
+                message: "liked successfully!",
                 data: result
             });
         } else {
@@ -135,7 +135,7 @@ const likeBlog = async (req, res) => {
     } catch (err) {
         sendResponse(res, 500, {
             success: false,
-            message: "action failed!",
+            message: err.message,
             error: err
         });
     }
