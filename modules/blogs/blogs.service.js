@@ -62,7 +62,7 @@ const likeBlog = async (blogId, userId) => {
     if (likedIndex === -1) {
         blog.likes.push(userId);
     } else {
-        blog.likes.splice(likedIndex, 1);
+        throw new Error("User Already liked the post!");
     }
     await blog.save();
     return blog;
