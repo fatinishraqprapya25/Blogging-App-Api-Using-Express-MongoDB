@@ -8,7 +8,12 @@ const notFoundHandler = require("./errors/notFoundHandler");
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+};
+
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(express.json());
 app.use(trackTraffic);
