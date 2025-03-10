@@ -21,10 +21,10 @@ authRouter.post("/sendVc", validateRequest(userValidations.sendVerificationCodeV
 authRouter.post("/resetPass", validateRequest(userValidations.resetPasswordValidation), userControllers.resetPassword);
 
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
+userRouter.get("/:id", userControllers.getSingleUser);
 
 // admin approval needed routes
 userRouter.get("/", varifyAdmin, userControllers.getAllUsers);
-userRouter.get("/:id", varifyAdmin, userControllers.getSingleUser);
 
 // user must be logged in route
 userRouter.patch("/", validateRequest(userValidations.updateUserValidationSchema), varifyToken, userControllers.updateUser);
