@@ -7,6 +7,7 @@ A simple and usefull blogging platform that allows users to **create, read, upda
 - Code Verification
 - Password Forget & Reset
 - Create, Read, Update, and Delete Blogs
+- Like, Comments and reply on Comments
 - Admin Approval System for Blogs
 - Responsive API with error handling
 - Modular Code Architecture (Scalable and Maintainable)
