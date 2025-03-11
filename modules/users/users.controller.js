@@ -285,7 +285,7 @@ const getSingleUser = async (req, res) => {
         });
     } catch (err) {
         sendResponse(res, 500, {
-            success: true,
+            success: false,
             message: "Failed in retrieving user",
         });
     }
