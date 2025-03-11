@@ -237,7 +237,7 @@ const loginUser = async (req, res) => {
 
 const validateToken = async (req, res) => {
     try {
-        const { token } = req.body;
+        const { token } = req.headers;
         const decoded = jwt.verify(token, config.jwtSecret);
         if (!decoded) {
             return sendResponse(res, 401, {
