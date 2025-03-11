@@ -235,6 +235,29 @@ const loginUser = async (req, res) => {
 
 }
 
+const validateToken = async (req, res) => {
+    try {
+        const { token } = req.body;
+        const decoded = jwt.verify(token, config.jwtSecret);
+        if (!decoded) {
+            return sendResponse(res, 401, {
+                success: false,
+                message: "token is not valid"
+            });
+        }
+        sendResponse(res, 200, {
+            success: true,
+            message: "token is valid!",
+            data: decoded
+        });
+    } catch (err) {
+        sendResponse(res, 500, {
+            success: false,
+            message: "validating token failed!"
+        });
+    }
+}
+
 const getAllUsers = async (req, res) => {
     try {
         const result = await userServices.getAllUsers();
