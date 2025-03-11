@@ -312,5 +312,5 @@ const updateUser = async (req, res) => {
     }
 };
 
-const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser, resendVerificationCode, resetPassword };
+const userControllers = { createUser, getAllUsers, getSingleUser, updateUser, loginUser, verifyUser, resendVerificationCode, resetPassword, validateToken };
 module.exports = userControllers;
