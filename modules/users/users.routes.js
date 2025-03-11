@@ -20,7 +20,7 @@ authRouter.post("/verify", validateRequest(userValidations.verifyUserValidation)
 authRouter.post("/sendVc", validateRequest(userValidations.sendVerificationCodeValidation), userControllers.resendVerificationCode);
 authRouter.post("/resetPass", validateRequest(userValidations.resetPasswordValidation), userControllers.resetPassword);
 
-authRouter.get("/validate-token", validateRequest(userValidations.validateTokenSchema), userControllers.validateToken);
+authRouter.get("/validate-token", userControllers.validateToken);
 
 authRouter.post("/login", validateRequest(userValidations.userLoginValidationSchema), userControllers.loginUser)
 userRouter.get("/:id", userControllers.getSingleUser);

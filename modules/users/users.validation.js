@@ -48,17 +48,6 @@ const userLoginValidationSchema = z.object({
     })
 });
 
-const validateTokenSchema = z.object({
-    body: z.object({
-        token: z.string()
-            .min(1, { message: "Token is required" })
-            .regex(
-                /^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/,
-                { message: "Invalid JWT token format" }
-            )
-    })
-});
-
-const userValidations = { creatUserValidationSchema, updateUserValidationSchema, userLoginValidationSchema, verifyUserValidation, resetPasswordValidation, sendVerificationCodeValidation, validateTokenSchema };
+const userValidations = { creatUserValidationSchema, updateUserValidationSchema, userLoginValidationSchema, verifyUserValidation, resetPasswordValidation, sendVerificationCodeValidation };
 
 module.exports = userValidations
