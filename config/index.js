@@ -9,5 +9,8 @@ module.exports = {
     bcryptCircleCount: process.env.BCRYPT_CIRCLE_COUNT,
     jwtSecret: process.env.JWT_SECRET,
     email: process.env.EMAIL,
-    appPass: process.env.APP_PASS
+    appPass: process.env.APP_PASS,
+    cloudinary: process.env.CLOUDINARY,
+    cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
+    cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET
 }
