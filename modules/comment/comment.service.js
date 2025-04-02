@@ -6,7 +6,7 @@ const createComment = async (commentData) => {
 }
 
 const readComments = async (blogId) => {
-    const result = await Comment.find({ blogId });
+    const result = await Comment.find({ blogId, isDeleted: false });
     return result;
 }
 
