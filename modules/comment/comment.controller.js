@@ -7,7 +7,7 @@ const createComment = async (req, res) => {
         commentData.userId = req.user.id;
         const newComment = await commentServices.createComment(commentData);
         return sendResponse(res, 200, {
-            succes: true,
+            success: true,
             message: "comment created successfully",
             data: newComment
         });
