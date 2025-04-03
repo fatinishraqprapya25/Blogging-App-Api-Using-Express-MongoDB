@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const config = require("../config");
 
 function upload(uploadFolder, fileSize) {
     const storage = multer.diskStorage({

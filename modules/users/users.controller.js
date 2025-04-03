@@ -21,7 +21,6 @@ const createUser = async (req, res) => {
         if (filename !== null) {
             const cloudUpload = await cloudinary.uploader.upload(filename);
             filePath = cloudUpload.url;
-            console.log(cloudUpload);
         } else {
             filePath = path.join(__dirname, "../../uploads/profile", "avatar.jpg");
         }
