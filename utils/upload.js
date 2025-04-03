@@ -1,13 +1,5 @@
 const multer = require("multer");
 const path = require("path");
-const config = require("../config");
-const cloudinary = require("cloudinary").v2;
-
-cloudinary.config({
-    cloud_name: config.cloudinary,
-    api_key: config.cloudinaryApiKey,
-    api_secret: config.cloudinaryApiSecret
-});
 
 function upload(uploadFolder, fileSize) {
     const storage = multer.diskStorage({

@@ -14,7 +14,7 @@ const userUtils = require("./users.utils");
 const varifyAdmin = require("../../middlewares/varifyAdmin");
 
 // auth routes
-authRouter.post("/register", upload("profile", 15).single("profilePic"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
+authRouter.post("/register", upload("profiles", 10).single("avatar"), validateRequest(userValidations.creatUserValidationSchema, userUtils.deteteUploadedPhotoIfValidationFailed), userControllers.createUser);
 
 authRouter.post("/verify", validateRequest(userValidations.verifyUserValidation), userControllers.verifyUser);
 authRouter.post("/sendVc", validateRequest(userValidations.sendVerificationCodeValidation), userControllers.resendVerificationCode);
