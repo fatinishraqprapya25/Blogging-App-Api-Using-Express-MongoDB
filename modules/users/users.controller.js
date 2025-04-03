@@ -10,6 +10,7 @@ const deleteUploadedFile = require("../../errors/deleteUploadedFile");
 const sendEmail = require("../../utils/sendEmail");
 const generateRandomCode = require("../../utils/generateRandomCode");
 const userUtils = require("./users.utils");
+const cloudinary = require("../../utils/cloudinary");
 
 const createUser = async (req, res) => {
     console.log(req);
@@ -17,10 +18,12 @@ const createUser = async (req, res) => {
         const userData = req.body;
         const filename = req.file ? req.file.path : null;
         let filePath;
-        if (filename === null) {
-            filePath = path.join(__dirname, "../../uploads/profile", "avatar.jpg");
+        if (filename !== null) {
+            const cloudUpload = await cloudinary.uploader.upload(filename);
+            filePath = cloudUpload.url;
+            console.log(cloudUpload);
         } else {
-            filePath = path.join(__dirname, "../../", filename);
+            filePath = path.join(__dirname, "../../uploads/profile", "avatar.jpg");
         }
 
         userData.profilePicture = filePath;
